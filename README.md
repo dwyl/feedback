@@ -13,7 +13,7 @@ without saying anything,
 the issue _rarely_ just "_goes away_".
 
 We need a _systematic_ way of sharing feedback on _anything_.
-So that _anyone_ can describe an issue
+So that _anyone_ can describe an issue, capture and address it.
 
 
 ## _What_?
@@ -25,6 +25,7 @@ So that _anyone_ can describe an issue
 > Initially the feedback will only be _internal_ but we need
 to _discuss_ the potential for how to make it `public`
 please share your thoughts on this: https://github.com/dwyl/feedback/issues/2
+
 
 
 
@@ -52,20 +53,36 @@ We recommend reading: https://github.com/dwyl/learn-phoenix-framework
 
 ### Get Started in _2 Minutes_
 
-
-+ Install dependencies with `mix deps.get`
++ Clone the Git repository: `git clone git@github.com:dwyl/feedback.git && cd feedback`
++ Install dependencies with `mix deps.get && npm install`
 + Create and migrate your database with `mix ecto.create && mix ecto.migrate`
-+ Install Node.js dependencies with `npm install`
 + Start Phoenix endpoint with `mix phoenix.server`
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+Now visit [`localhost:4000`](http://localhost:4000) from your web browser.
 
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
 
-## Learn more
+# Research
 
-  * Official website: http://www.phoenixframework.org/
-  * Guides: http://phoenixframework.org/docs/overview
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+see: https://github.com/dwyl/feedback/issues/1
+
+### Existing Feedback Mechanisms/Solutions
+
++ ***Uservoice***: https://www.uservoice.com is one of the most well-known
+product/user feedback platforms, but when we attempt to search their website
+for the word "anonymous"
+https://www.google.com/webhp?#q=https://www.uservoice.com:+anonymous
+we don't see any results in their product.
+But there is something on their forum: https://feedback.uservoice.com/forums/1-product-management/suggestions/956361-allow-anonymous-users-to-create-ideas-without-leav
++ Please add other existing providers
+and search for if they allow anonymous feedback ... 
+
+### Open Source Feedback Systems?
+
+> Are there any _Open Source_ feedback systems we can use and/or learn from.
+
+
+### Gather Requirements
+
+> Gather requirements from people you know who either work
+or _have_ worked somewhere they don't _love_.
+What _specifically_ would they like to have in a feedback system?
