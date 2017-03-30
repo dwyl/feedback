@@ -22,8 +22,9 @@ So that _anyone_ can describe an issue
 + Store that feedback in a simple database
 + Act on the feedback and show progress towards _solving_ any issues raised.
 
-> Initially the feedback will only be _internal_ but we will
-discuss ...
+> Initially the feedback will only be _internal_ but we need
+to _discuss_ the potential for how to make it `public`
+please share your thoughts on this: https://github.com/dwyl/feedback/issues/2
 
 
 
