@@ -63,26 +63,5 @@ Now visit [`localhost:4000`](http://localhost:4000) from your web browser.
 
 # Research
 
-see: https://github.com/dwyl/feedback/issues/1
-
-### Existing Feedback Mechanisms/Solutions
-
-+ ***Uservoice***: https://www.uservoice.com is one of the most well-known
-product/user feedback platforms, but when we attempt to search their website
-for the word "anonymous"
-https://www.google.com/webhp?#q=https://www.uservoice.com:+anonymous
-we don't see any results in their product.
-But there is something on their forum: https://feedback.uservoice.com/forums/1-product-management/suggestions/956361-allow-anonymous-users-to-create-ideas-without-leav
-+ Please add other existing providers
-and search for if they allow anonymous feedback ... 
-
-### Open Source Feedback Systems?
-
-> Are there any _Open Source_ feedback systems we can use and/or learn from.
-
-
-### Gather Requirements
-
-> Gather requirements from people you know who either work
-or _have_ worked somewhere they don't _love_.
-What _specifically_ would they like to have in a feedback system?
+See the [`research.md`](https://github.com/dwyl/feedback/blob/master/research.md)
+file.
