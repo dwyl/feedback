@@ -116,7 +116,7 @@ Uservoice found at https://github.com/ivandiazwm/phpback/. It's a feedback syste
 for products that can be directly injected into your website.
 
 
-+ Struggling to find any _Open Source_ feedback systems that will fit our exact
++ Scarce options for _Open Source_ feedback systems that will fit our exact
 needs. Please add other existing providers and add them to the list.
 
 ### Gather Requirements
@@ -127,7 +127,7 @@ What _specifically_ would they like to have in a feedback system?
 
 #### Examples
 
-@conorc1000:
+[@conorc1000](https://github.com/conorc1000):
 ##### Previous feedback experience
 Conor worked for a civil engineering company run by a husband and wife. The husband
 was the boss of the company and the wife was the company secretary. They would
