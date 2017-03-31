@@ -136,7 +136,7 @@ regarding the company and your experience within it. However, this appraisal
 was more of a box ticking exercise and the feedback given wouldn't filter
 through to the boss which meant that no action could be taken on it, rendering
 the whole thing a bit pointless.
-##### Ideal Feedback Scenario
+##### Ideal feedback experience
 Conor's ideal feedback system would consist of a free text input where you could
 voice your opinion on the organisation that you work with. He would have two
 toggles, one for anonymity and then the other for privacy. By switching the
