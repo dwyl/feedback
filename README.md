@@ -144,3 +144,18 @@ toggles on the feedback it would mean that you could attach your name to it, or
 not, and you could also say whether or not you would prefer if the feedback was
 kept private or made public. He said that it might be good to have an incentive
 to give feedback as well so that more people would get involved.
+
+[@roryc89](https://github.com/roryc89)
+##### Previous feedback experience
+Rory worked for a spread-betting platform in London and said that he had similar
+opportunities to give feedback in the form of appraisals. His perception was
+that the feedback wasn't absorbed sufficiently and that it got lost among the
+noise.
+##### Ideal feedback experience
+Rory's ideal feedback experience would be one with the ability to give anonymous
+feedback about anything that was going on within the organisation. Also he would
+want to open discussions about decisions that the agency makes in order to
+further understand the way it functions and why. Rory also believes that
+feedback should have the option to be private so that people are protected if
+neccessary (you might be able to work out the identity of a person just by
+the way they phrase something or the context in which they are talking). 
