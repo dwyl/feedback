@@ -65,3 +65,9 @@ Now visit [`localhost:4000`](http://localhost:4000) from your web browser.
 
 See the [`research.md`](https://github.com/dwyl/feedback/blob/master/research.md)
 file.
+
+# Conclusion
+
+We have [surveyed the market](https://github.com/dwyl/feedback/blob/master/research.md)
+and can conclude that there isn't an existing Open-Source, easy-to-run application
+or Service with an API we can use in April 2017 so we decided to *make* one.
