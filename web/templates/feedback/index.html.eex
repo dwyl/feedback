@@ -1,0 +1,10 @@
+<div class="logout-button">
+  <%= link "Log out", to: session_path(@conn, :delete, @current_user), method: "delete", class: "logout-button" %>
+</div>
+<div class="title">Feedback Dashboard</div>
+
+<%= for feedback <- @feedback do %>
+  <div class="feedback-item">
+    <%= truncate_text(feedback.item, 35) %>
+  </div>
+<% end %>

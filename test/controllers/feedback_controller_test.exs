@@ -15,4 +15,13 @@ defmodule Feedback.FeedbackControllerTest do
     conn = post conn, feedback_path(conn, :create, %{"feedback" => %{item: "", permalink_string: ""}})
     assert redirected_to(conn, 302) =~ "/feedback/new"
   end
+
+  test "/feedback", %{conn: conn} do
+    user = insert_validated_user()
+    conn =
+      conn
+      |> assign(:current_user, user)
+    conn = get conn, feedback_path(conn, :index)
+    assert html_response(conn, 200) =~ "Feedback Dashboard"
+  end
 end
