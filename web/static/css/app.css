@@ -1,1 +1,35 @@
-/* This file is for your main application css. */
+.button {
+  width: 100%;
+  background-color: #4ABDAC;
+  border-style: none;
+  color: #ffffff;
+  padding: 1rem;
+  border-radius: 5px;
+  font-size: 2rem;
+}
+
+.help-block {
+  text-transform: capitalize;
+  color: #e74c3c;
+}
+
+.subtitle {
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.text_area {
+  resize: none;
+  min-height: 15rem;
+  outline: none;
+  width: 100%;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+.title {
+  text-align: center;
+  font-size: 2.5rem;
+}
