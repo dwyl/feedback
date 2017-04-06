@@ -9,6 +9,11 @@ defmodule Feedback.Mixfile do
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     test_coverage: [tool: ExCoveralls],
+     preferred_cli_env: ["coveralls": :test,
+                         "coveralls.detail": :test,
+                         "coveralls.post": :test,
+                         "coveralls.html": :test],
      aliases: aliases(),
      deps: deps()]
   end
@@ -19,7 +24,7 @@ defmodule Feedback.Mixfile do
   def application do
     [mod: {Feedback, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :comeonin]]
   end
 
   # Specifies which paths to compile per environment.
@@ -37,7 +42,9 @@ defmodule Feedback.Mixfile do
      {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
-     {:cowboy, "~> 1.0"}]
+     {:cowboy, "~> 1.0"},
+     {:comeonin, "~> 2.0"},
+     {:excoveralls, "~> 0.6.2"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
