@@ -1,10 +1,15 @@
 <div class="logout-button">
-  <%= link "Log out", to: session_path(@conn, :delete, @current_user), method: "delete", class: "logout-button" %>
+  <%= link "Log out", to: session_path(@conn, :delete, @current_user), method: "delete", class: "logout-button back-button" %>
 </div>
 <div class="title">Feedback Dashboard</div>
 
 <%= for feedback <- @feedback do %>
-  <div class="feedback-item">
-    <%= truncate_text(feedback.item, 35) %>
-  </div>
+  <a class="link" href="/feedback/<%= feedback.permalink_string %>">
+    <div class="feedback-item">
+      <%= truncate_text(feedback.item, 32) %>
+      <%= if feedback.response do %>
+        <img class="feedback-responded" src="/images/tick.svg" />
+      <% end %>
+    </div>
+  </a>
 <% end %>

@@ -1,10 +1,14 @@
 defmodule Feedback.TestHelpers do
-  alias Feedback.{Repo, User}
+  alias Feedback.{Repo, User, Feedback}
 
   @user_id 1
+  @feedback_id 1
 
   def id() do
-    %{user: @user_id}
+    %{
+      user: @user_id,
+      feedback: @feedback_id
+    }
   end
 
   def insert_validated_user(attrs \\ %{}) do
@@ -18,6 +22,18 @@ defmodule Feedback.TestHelpers do
 
     %User{}
     |> User.registration_changeset(changes)
+    |> Repo.insert!
+  end
+
+  def insert_feedback(attrs \\ %{}) do
+    changes = Map.merge(
+      %{item: "Feedback",
+        permalink_string: "thisisapermalink",
+        id: @feedback_id},
+        attrs)
+
+    %Feedback{}
+    |> Feedback.changeset(changes)
     |> Repo.insert!
   end
 end

@@ -17,4 +17,10 @@ defmodule Feedback.Feedback do
     |> validate_format(:submitter_email, ~r/@/)
     |> validate_required([:item, :permalink_string])
   end
+
+  defimpl Phoenix.Param, for: Feedback.Feedback do
+    def to_param(%{permalink_string: permalink_string}) do
+      "#{permalink_string}"
+    end
+  end
 end

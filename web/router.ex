@@ -14,7 +14,7 @@ defmodule Feedback.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
-    resources "/feedback", FeedbackController, only: [:index, :new, :create]
+    resources "/feedback", FeedbackController, only: [:index, :new, :create, :show, :update]
     resources "/session", SessionController, only: [:new, :create, :delete]
   end
 
