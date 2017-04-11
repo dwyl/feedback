@@ -12,11 +12,14 @@
     </div>
   </a>
 <% end %>
-<div class="responded-container">
-  <div class="horizontal-spacer-responded"></div>
-  <div class="responded">RESPONDED</div>
-  <div class="horizontal-spacer-responded"></div>
-</div>
+<%= if length(@responded_feedback) > 0 do %>
+  <div class="responded-container">
+    <div class="horizontal-spacer-responded"></div>
+    <div class="responded">RESPONDED</div>
+    <div class="horizontal-spacer-responded"></div>
+  </div>
+<%end%>
+
 <%= for responded_feedback <- @responded_feedback do %>
   <a class="link" href="/feedback/<%= responded_feedback.permalink_string %>">
     <div class="feedback-item">
