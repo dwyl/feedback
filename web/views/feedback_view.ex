@@ -21,4 +21,21 @@ defmodule Feedback.FeedbackView do
         text
     end
   end
+
+  def format_date(date) do
+    date_today = DateTime.utc_now()
+    same_day = date.day == date_today.day
+    same_month = date.month == date_today.month
+    same_year = date.year == date_today.year
+    same_date = same_day && same_month && same_year
+    case same_date do
+      true -> "Today"
+      false ->
+        month = Integer.to_string(date.month)
+        year = Integer.to_string(date.year)
+        day = Integer.to_string(date.day)
+
+        day <> "/" <> month <> "/" <> year
+    end
+  end
 end

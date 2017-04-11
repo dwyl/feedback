@@ -17,6 +17,8 @@ defmodule Feedback.FeedbackControllerTest do
   end
 
   test "/feedback", %{conn: conn} do
+    insert_feedback()
+    insert_feedback(%{id: 2, response: "Response"})
     user = insert_validated_user()
     conn =
       conn

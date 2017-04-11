@@ -6,8 +6,16 @@ defmodule Feedback.FeedbackController do
 
   def index(conn, _params) do
     raw_feedback = Repo.all(Feedback)
-    feedback = Enum.filter(raw_feedback, fn item -> item.response == nil end)
-    responded_feedback = Enum.filter(raw_feedback, fn item -> item.response != nil end)
+    feedback =
+      raw_feedback
+      |> Enum.filter(fn item -> item.response == nil end)
+      |> sort_by_ascending_date()
+
+    responded_feedback =
+      raw_feedback
+      |> Enum.filter(fn item -> item.response != nil end)
+      |> sort_by_ascending_date()
+
     render conn, "index.html", feedback: feedback, responded_feedback: responded_feedback
   end
 
@@ -61,5 +69,8 @@ defmodule Feedback.FeedbackController do
     :crypto.strong_rand_bytes(length) |> Base.url_encode64 |> binary_part(0, length)
   end
 
+  defp sort_by_ascending_date(enum) do
+    enum |> Enum.sort(&(&1.inserted_at >= &2.inserted_at))
+  end
 
 end

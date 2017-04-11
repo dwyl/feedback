@@ -61,7 +61,8 @@
 }
 
 .feedback-item {
-  padding: 2rem;
+  padding: 1rem;
+  padding-left: 2rem;
   border-radius: 5px;
   background-color: #4ABDAC;
   color: #ffffff;
@@ -126,7 +127,15 @@
   display: inline-block;
   width: 2rem;
   height: 1px;
-  background-color: black;
+  background-color: grey;
+  margin-bottom: 0.5rem;
+}
+
+.horizontal-spacer-responded {
+  display: inline-block;
+  width: 7rem;
+  height: 1px;
+  background-color: grey;
   margin-bottom: 0.5rem;
 }
 
@@ -154,9 +163,22 @@
   display: inline-block;
   margin-left: 0.3rem;
   margin-right: 0.3rem;
+  color: grey;
 }
 
 .or-container {
+  text-align: center;
+  padding: 1rem;
+}
+
+.responded {
+  display: inline-block;
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
+  color: grey;
+}
+
+.responded-container {
   text-align: center;
   padding: 1rem;
 }
