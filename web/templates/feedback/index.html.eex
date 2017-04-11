@@ -12,13 +12,19 @@
     </div>
   </a>
 <% end %>
+<%= if length(@feedback) == 0 do %>
+  <div class="feedback-response-message">
+    Looks like you don't have any new feedback yet! You will be notified through email
+    once there is!
+  </div>
+<% end %>
 <%= if length(@responded_feedback) > 0 do %>
   <div class="responded-container">
     <div class="horizontal-spacer-responded"></div>
     <div class="responded">RESPONDED</div>
     <div class="horizontal-spacer-responded"></div>
   </div>
-<%end%>
+<% end %>
 
 <%= for responded_feedback <- @responded_feedback do %>
   <a class="link" href="/feedback/<%= responded_feedback.permalink_string %>">
