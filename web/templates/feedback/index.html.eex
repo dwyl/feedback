@@ -13,3 +13,13 @@
     </div>
   </a>
 <% end %>
+<%= for responded_feedback <- @responded_feedback do %>
+  <a class="link" href="/feedback/<%= responded_feedback.permalink_string %>">
+    <div class="feedback-item">
+      <%= truncate_text(responded_feedback.item, 32) %>
+      <%= if responded_feedback.response do %>
+        <img class="feedback-responded" src="/images/tick.svg" />
+      <% end %>
+    </div>
+  </a>
+<% end %>

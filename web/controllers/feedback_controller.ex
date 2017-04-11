@@ -5,8 +5,10 @@ defmodule Feedback.FeedbackController do
   plug :authenticate when action in [:index]
 
   def index(conn, _params) do
-    feedback = Repo.all(Feedback)
-    render conn, "index.html", feedback: feedback
+    raw_feedback = Repo.all(Feedback)
+    feedback = Enum.filter(raw_feedback, fn item -> item.response == nil end)
+    responded_feedback = Enum.filter(raw_feedback, fn item -> item.response != nil end)
+    render conn, "index.html", feedback: feedback, responded_feedback: responded_feedback
   end
 
   def new(conn, _params) do
