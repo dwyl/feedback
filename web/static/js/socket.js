@@ -68,6 +68,12 @@ if (responseButton !== null) {
   })
 }
 
+if (feedbackButton !== null) {
+  feedbackButton.addEventListener("click", event => {
+    channel.push("responded", {body: "responded"})
+  })
+}
+
 channel.on("responded", payload => {
   setTimeout(function () {
     window.location.reload()

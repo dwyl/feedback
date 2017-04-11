@@ -9,5 +9,5 @@
     <%= textarea f, :item, placeholder: "What's on your mind?", class: "text_area" %>
     <%= error_tag f, :item %>
   </div>
-  <%= submit "Send", class: "button" %>
+  <%= submit "Send", [class: "button", id: "feedback-button"] %>
 <% end %>
