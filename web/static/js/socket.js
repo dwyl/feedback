@@ -59,7 +59,7 @@ let responseButton = document.getElementById("response-button");
 let feedbackButton = document.getElementById("feedback-button");
 
 channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
+  .receive("ok", resp => { console.log("Sockets initialised", resp) })
   .receive("error", resp => { console.log("Unable to join", resp) })
 
 if (responseButton !== null) {
