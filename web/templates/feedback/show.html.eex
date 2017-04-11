@@ -14,7 +14,7 @@
       <br />
       <span class="feedback-anonymous-hint">(It's also the url of this page!)</span>
     </div>
-    <%= if @feedback.submitter_email == nil && @feedback.response != nil do %>
+    <%= if @feedback.submitter_email == nil && @feedback.response == nil do %>
     <div class="or-container">
       <div class="horizontal-spacer"></div>
       <div class="or">OR</div>
@@ -74,7 +74,7 @@
     <%= form_for @changeset, feedback_path(@conn, :update, @feedback.id), fn f -> %>
       <%= textarea f, :response, placeholder: "Enter your feedback response", class: "text_area" %>
       <%= error_tag f, :response %>
-      <%= submit "Respond", class: "button" %>
+      <%= submit "Respond", [class: "button response-button", id: "response-button"] %>
     <% end %>
   <% end %>
 </div>
