@@ -36,7 +36,7 @@
     </div>
     <% end %>
   <% end %>
-  <%= if @feedback.submitter_email != nil && !@feedback.responded do %>
+  <%= if @feedback.submitter_email != nil && !@feedback.responded && !@conn.assigns.current_user do %>
   <div class="feedback-email-submitted">
     Feedback response notifications will be sent to <span class="highlight"><%= @feedback.submitter_email %></span>
     <img class="feedback-email-submitted-tick" src="/images/tick.svg" />
