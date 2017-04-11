@@ -42,6 +42,11 @@
   text-align: center;
 }
 
+.feedback-date {
+  font-size: 1.5rem;
+  color: grey;
+}
+
 .feedback-email-submitted {
   text-align: center;
   padding: 1rem;

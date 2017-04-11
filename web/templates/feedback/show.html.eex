@@ -14,7 +14,7 @@
       <br />
       <span class="feedback-anonymous-hint">(It's also the url of this page!)</span>
     </div>
-    <%= if @feedback.submitter_email == nil && !@feedback.responded do %>
+    <%= if @feedback.submitter_email == nil && @feedback.response != nil do %>
     <div class="or-container">
       <div class="horizontal-spacer"></div>
       <div class="or">OR</div>
@@ -43,7 +43,9 @@
   </div>
   <% end %>
   <div class="feedback-item-container">
-    <div class="feedback-item-title">Feedback</div>
+    <div class="feedback-item-title">Feedback -
+      <span class="feedback-date"><%= format_date(@feedback.inserted_at) %></span>
+    </div>
     <div><%= @feedback.item %></div>
   </div>
   <%= if !@conn.assigns.current_user do %>
@@ -62,7 +64,9 @@
   <% end %>
   <%= if @feedback.response do %>
     <div class="feedback-response-container">
-      <div class="feedback-response-title">Response</div>
+      <div class="feedback-response-title">Response -
+        <span class="feedback-date"><%= format_date(@feedback.updated_at) %></span>
+      </div>
       <div><%= @feedback.response %></div>
     </div>
   <% end %>
