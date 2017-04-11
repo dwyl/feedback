@@ -23,7 +23,7 @@ defmodule Feedback.FeedbackViewTest do
   end
 
   test "format_date not today" do
-    date = date = ~D[2017-01-01]
+    date = ~D[2017-01-01]
     format_date = Feedback.FeedbackView.format_date(date)
     assert format_date == "1/1/2017"
   end
