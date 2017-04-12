@@ -59,11 +59,13 @@ defmodule Feedback.FeedbackController do
         conn
         |> put_flash(:info, "Thank you so much for your feedback!")
         |> redirect(to: feedback_path(conn, :show, feedback))
+        |> halt()
       {:error, changeset} ->
         error = format_error(changeset)
         conn
         |> put_flash(:error, "Oops! Something went wrong. #{error}")
         |> redirect(to: feedback_path(conn, :new))
+        |> halt()
     end
   end
 
