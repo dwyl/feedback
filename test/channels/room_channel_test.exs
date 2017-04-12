@@ -13,5 +13,6 @@ defmodule Feedback.RoomChannelTest do
   test "responded replies with status ok", %{socket: socket} do
     push socket, "responded", %{body: "body"}
     assert_broadcast "responded", %{body: "body"}
+    leave socket
   end
 end
