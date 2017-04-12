@@ -25,12 +25,17 @@
 }
 
 .dwyl-logo {
-  width: 10rem;
+  width: 6rem;
 }
 
 .dwyl-logo-container {
   text-align: center;
   margin-bottom: 1rem;
+}
+
+.emotion-container {
+  text-align: center;
+  min-height: 7rem;
 }
 
 .feedback-anonymous-hint {
@@ -85,6 +90,7 @@
   padding: 1rem;
   border-radius: 5px;
   margin-bottom: 1rem;
+  position: relative;
 }
 
 .feedback-item-date {
@@ -102,6 +108,11 @@
   margin-bottom: 0.5rem;
   font-size: 2rem;
   color: #4ABDAC;
+}
+
+.feedback-question {
+  text-align: center;
+  font-size: 2rem;
 }
 
 .feedback-responded {
@@ -181,6 +192,13 @@
   padding-right: 0.5rem;
 }
 
+.mood-image {
+  width: 3rem;
+  position: absolute;
+  right: 1rem;
+  top: 0.5rem;
+}
+
 .or {
   display: inline-block;
   margin-left: 0.3rem;
@@ -232,6 +250,100 @@
   margin-bottom: 1rem;
 }
 
+.top-buffer {
+  margin-top: 2rem;
+}
+
 .underline {
   text-decoration: underline;
+}
+
+/* emotion css */
+
+.delighted, .happy, .neutral, .sad, .angry {
+  /* HIDE RADIO */
+  visibility: hidden;
+  /* Makes input not-clickable */
+  position: absolute;
+  /* Remove input from document flow */
+}
+
+.delighted + label {
+  background-image: url("/images/delighted.svg");
+}
+
+.happy + label {
+  background-image: url("/images/happy.svg");
+}
+
+.neutral + label {
+  background-image: url("/images/neutral.svg");
+}
+
+.sad + label {
+  background-image: url("/images/sad.svg");
+}
+
+.angry + label {
+  background-image: url("/images/angry.svg");
+}
+
+.delighted + label::after, .happy + label::after, .neutral + label::after, .sad + label::after, .angry + label::after {
+  text-align: center;
+  width: 100%;
+  position: relative;
+  display: block;
+  color: #EA5C37;
+}
+
+input + label {
+  /* IMAGE STYLES */
+  cursor: pointer;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  -webkit-o-transition: all 200ms ease-in;
+  -moz-o-transition: all 200ms ease-in;
+  transition: all 200ms ease-in;
+  height: 3em;
+  width: 3em;
+  position: relative;
+  top: 25%;
+  transform: translateY(-25%);
+}
+
+label + input:hover {
+  /* HIDE RADIO */
+  -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+  -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
+  filter: brightness(1.2) grayscale(.5) opacity(.9);
+}
+input:checked + label {
+  /* (RADIO CHECKED) IMAGE STYLES */
+  -webkit-filter: none;
+  -moz-filter: none;
+  filter: none;
+  background-color: rgb(234, 130, 75);
+  background-color: rgba(234, 92, 55, 0.4);
+  border-radius: 100%;
+  width: 6rem;
+  height: 6rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+@media (min-width: 600px) {
+  input + label {
+    width: 6rem;
+    height: 6rem;
+  }
+  input:checked + label {
+    width: 9rem;
+    height: 9rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+  .emotion-container {
+    min-height: 10rem;
+  }
 }

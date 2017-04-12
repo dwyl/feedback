@@ -19,3 +19,20 @@ import "phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 import socket from "./socket"
+
+function addLabelListeners() {
+  [].forEach.call(
+    document.querySelectorAll('.emotion-container label'),
+    function (label_elem) {
+      label_elem.addEventListener('click', function () {
+        var id = label_elem.getAttribute('for');
+        var input_elem = document.querySelector('#' + id);
+        input_elem.checked = !input_elem.checked;
+      })
+    }
+  )
+}
+
+export var App = {
+  addLabelListeners: addLabelListeners
+}

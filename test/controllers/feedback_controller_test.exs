@@ -3,11 +3,17 @@ defmodule Feedback.FeedbackControllerTest do
 
   test "/feedback/new", %{conn: conn} do
     conn = get conn, "/feedback/new"
-    assert html_response(conn, 200) =~ "Help us learn and grow"
+    assert html_response(conn, 200) =~ "Help us be better"
+  end
+
+  test "/feedback/create valid", %{conn: conn} do
+    conn = post conn, feedback_path(conn, :create, %{"feedback" => %{item: "test", mood: "happy"}})
+    [{_header, location}] = Enum.filter(conn.resp_headers, fn {header, _value}  -> header == "location" end)
+    assert redirected_to(conn, 302) =~ location
   end
 
   test "/feedback/create", %{conn: conn} do
-    conn = post conn, feedback_path(conn, :create, %{"feedback" => %{item: "test", permalink_string: "1r5AY5HKgD4Efp-yovMrltpe3AWYKWVL"}})
+    conn = post conn, feedback_path(conn, :create, %{"feedback" => %{item: "test"}})
     assert redirected_to(conn, 302) =~ "/feedback/new"
   end
 

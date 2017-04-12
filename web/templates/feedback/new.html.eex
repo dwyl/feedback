@@ -1,12 +1,29 @@
 <div class="dwyl-logo-container">
   <img src="/images/dwyl-heart-only-logo.png" class="dwyl-logo" />
 </div>
-<div class="title">Help us learn and grow</div>
+<div class="title">Help us be better</div>
 <div class="subtitle">Submit your anonymous feedback below. Don't worry, we can take it!</div>
 
 <%= form_for @changeset, feedback_path(@conn, :create), fn f -> %>
+  <div class="feedback-question">How are you feeling?</div>
+  <br />
+  <br />
+  <div class="emotion-container">
+    <%= for emotion <- @emotions do %>
+      <%=radio_button(
+         f,
+         :mood,
+         emotion,
+         [class: emotion, id: "feedback_" <> emotion]) %>
+      <%= label f, emotion, "" %>
+    <% end %>
+    <%= if @changeset.action do %>
+      <%= error_tag f, :mood %>
+    <% end %>
+  </div>
+  <div class="feedback-question">Tell us your thoughts.</div>
   <div class="form-group">
-    <%= textarea f, :item, placeholder: "What's on your mind?", class: "text_area" %>
+    <%= textarea f, :item, placeholder: "What's on your mind?", class: "text_area top-buffer" %>
     <%= error_tag f, :item %>
   </div>
   <%= submit "Send", [class: "button", id: "feedback-button"] %>

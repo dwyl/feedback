@@ -7,15 +7,16 @@ defmodule Feedback.Feedback do
     field :responded, :boolean
     field :submitter_email, :string
     field :permalink_string, :string
+    field :mood, :string
 
     timestamps()
   end
 
   def changeset(struct, params \\ :invalid) do
     struct
-    |> cast(params, [:item, :response, :responded, :submitter_email, :permalink_string])
+    |> cast(params, [:item, :response, :responded, :submitter_email, :permalink_string, :mood])
     |> validate_format(:submitter_email, ~r/@/)
-    |> validate_required([:item, :permalink_string])
+    |> validate_required([:item, :permalink_string, :mood])
   end
 
   defimpl Phoenix.Param, for: Feedback.Feedback do

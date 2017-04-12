@@ -29,6 +29,7 @@ defmodule Feedback.TestHelpers do
     changes = Map.merge(
       %{item: "Feedback",
         permalink_string: "thisisapermalink",
+        mood: "happy",
         id: @feedback_id},
         attrs)
 

@@ -21,7 +21,8 @@ defmodule Feedback.FeedbackController do
 
   def new(conn, _params) do
     changeset = Feedback.changeset(%Feedback{})
-    render conn, "new.html", changeset: changeset
+    emotions = ["angry", "sad", "neutral", "happy", "delighted"]
+    render conn, "new.html", changeset: changeset, emotions: emotions
   end
 
   def show(conn, %{"id" => permalink}) do
@@ -59,10 +60,11 @@ defmodule Feedback.FeedbackController do
         |> put_flash(:info, "Thank you so much for your feedback!")
         |> redirect(to: feedback_path(conn, :show, feedback))
       {:error, changeset} ->
-        render conn, "new.html", changeset: changeset
+        error = format_error(changeset)
+        conn
+        |> put_flash(:error, "Oops! Something went wrong. #{error}")
+        |> redirect(to: feedback_path(conn, :new))
     end
-    conn
-    |> redirect(to: feedback_path(conn, :new))
   end
 
   defp generate_permalink_string(length) do
@@ -71,6 +73,23 @@ defmodule Feedback.FeedbackController do
 
   defp sort_by_ascending_date(enum) do
     enum |> Enum.sort(&(&1.inserted_at >= &2.inserted_at))
+  end
+
+  defp format_error(changeset) do
+    errors = changeset.errors
+    case length(errors) do
+      1 ->
+        {key, _} = Enum.at(errors, 0)
+        case key do
+          :item ->
+            "Make sure you write something in the feedback textbox"
+          :mood ->
+            "Make sure you select your mood"
+        end
+      2 ->
+        "To leave feedback, select your mood and write your thoughts in the
+        textbox"
+    end
   end
 
 end

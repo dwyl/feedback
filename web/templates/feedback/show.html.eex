@@ -1,4 +1,9 @@
 <div>
+  <%= if !@conn.assigns.current_user do %>
+    <a class="link" href="/feedback/new">
+      <div class="back-button">Leave more feedback</div>
+    </a>
+  <% end %>
   <%= if @conn.assigns.current_user do %>
     <a class="link" href="/feedback">
       <div class="back-button">Back</div>
@@ -43,6 +48,7 @@
   </div>
   <% end %>
   <div class="feedback-item-container">
+    <img class="mood-image" src="/images/<%= @feedback.mood %>.svg" />
     <div class="feedback-item-title">Feedback -
       <span class="feedback-date"><%= format_date(@feedback.inserted_at) %></span>
     </div>
