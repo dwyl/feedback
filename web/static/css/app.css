@@ -24,6 +24,46 @@
   font-size: 2rem;
 }
 
+.dashboard-container {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  display: inline-block;
+}
+
+.dashboard-emotion {
+  width: 9rem;
+}
+
+.dashboard-emotion-container {
+  display: inline-block;
+  border: 1px solid lightblue;
+  padding: 2rem;
+  margin: 0.5rem;
+  border-radius: 5px;
+  position: relative;
+}
+
+.dashboard-info {
+  width: 9rem;
+}
+
+.dashboard-info-container {
+  text-align: center;
+  display: inline-block;
+  padding: 2rem;
+  padding-top: 1.5rem;
+  margin: 0.5rem;
+  border-radius: 5px;
+  position: relative;
+  color: #ffffff;
+  background-color: #4ABDAC;
+  float: left;
+  height: 13.2rem;
+  width: 13.2rem;
+  margin-right: 0.9rem;
+}
+
 .dwyl-logo {
   width: 6rem;
 }
@@ -50,6 +90,7 @@
 
 .feedback-dashboard-title {
   color: #4ABDAC;
+  text-transform: capitalize;
 }
 
 .feedback-date {
@@ -108,6 +149,19 @@
   margin-bottom: 0.5rem;
   font-size: 2rem;
   color: #4ABDAC;
+}
+
+.feedback-notification {
+  display: inline-block;
+  position: absolute;
+  right: -1rem;
+  top: -1rem;
+  color: #ffffff;
+  background-color: #e74c3c;
+  border-radius: 100%;
+  padding: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .feedback-question {
@@ -345,5 +399,23 @@ input:checked + label {
   }
   .emotion-container {
     min-height: 10rem;
+  }
+  .dashboard-emotion {
+    width: 14rem;
+  }
+  .dashboard-info-container {
+    height: 18.1rem;
+    width: 18.1rem;
+    padding-top: 4rem;
+    margin: 0.4rem;
+    font-size: 1.6rem;
+    margin-right: 0.9rem;
+  }
+  .dashboard-container {
+    padding-left: 9%;
+  }
+  .dashboard-emotion-container {
+    height: 18rem;
+    width: 18rem;
   }
 }

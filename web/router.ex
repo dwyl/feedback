@@ -16,6 +16,11 @@ defmodule Feedback.Router do
     get "/", PageController, :index
     resources "/feedback", FeedbackController, only: [:index, :new, :create, :show, :update]
     resources "/session", SessionController, only: [:new, :create, :delete]
+    get "/delighted", FeedbackController, :delighted
+    get "/happy", FeedbackController, :happy
+    get "/neutral", FeedbackController, :neutral
+    get "/sad", FeedbackController, :sad
+    get "/angry", FeedbackController, :angry
   end
 
 end

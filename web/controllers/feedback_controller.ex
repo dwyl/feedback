@@ -2,21 +2,49 @@ defmodule Feedback.FeedbackController do
   use Feedback.Web, :controller
   alias Feedback.Feedback
 
-  plug :authenticate when action in [:index]
+  plug :authenticate when action in [:index, :angry, :upset, :neutral, :happy, :delighted]
 
   def index(conn, _params) do
     raw_feedback = Repo.all(Feedback)
-    feedback =
+    happy_feedback =
       raw_feedback
       |> Enum.filter(fn item -> item.response == nil end)
+      |> Enum.filter(fn item -> item.mood == "happy" end)
       |> sort_by_ascending_date()
 
-    responded_feedback =
+    delighted_feedback =
       raw_feedback
-      |> Enum.filter(fn item -> item.response != nil end)
+      |> Enum.filter(fn item -> item.response == nil end)
+      |> Enum.filter(fn item -> item.mood == "delighted" end)
       |> sort_by_ascending_date()
 
-    render conn, "index.html", feedback: feedback, responded_feedback: responded_feedback
+    neutral_feedback =
+      raw_feedback
+      |> Enum.filter(fn item -> item.response == nil end)
+      |> Enum.filter(fn item -> item.mood == "neutral" end)
+      |> sort_by_ascending_date()
+
+    angry_feedback =
+      raw_feedback
+      |> Enum.filter(fn item -> item.response == nil end)
+      |> Enum.filter(fn item -> item.mood == "angry" end)
+      |> sort_by_ascending_date()
+
+    sad_feedback =
+      raw_feedback
+      |> Enum.filter(fn item -> item.response == nil end)
+      |> Enum.filter(fn item -> item.mood == "sad" end)
+      |> sort_by_ascending_date()
+
+    emotions = [
+      {"delighted", delighted_feedback},
+      {"happy", happy_feedback},
+      {"neutral", neutral_feedback},
+      {"sad", sad_feedback},
+      {"angry", angry_feedback}]
+
+    render conn, "index.html", emotions: emotions
+
   end
 
   def new(conn, _params) do
@@ -68,6 +96,93 @@ defmodule Feedback.FeedbackController do
         |> halt()
     end
   end
+
+  def happy(conn, _params) do
+    raw_feedback = Repo.all(Feedback)
+    happy_feedback =
+      raw_feedback
+      |> Enum.filter(fn item -> item.response == nil end)
+      |> Enum.filter(fn item -> item.mood == "happy" end)
+      |> sort_by_ascending_date()
+
+    responded_happy_feedback =
+      raw_feedback
+      |> Enum.filter(fn item -> item.response != nil end)
+      |> Enum.filter(fn item -> item.mood == "happy" end)
+      |> sort_by_ascending_date()
+
+    render conn, "happy.html", happy_feedback: happy_feedback, responded_happy_feedback: responded_happy_feedback
+  end
+
+
+  def delighted(conn, _params) do
+    raw_feedback = Repo.all(Feedback)
+    delighted_feedback =
+      raw_feedback
+      |> Enum.filter(fn item -> item.response == nil end)
+      |> Enum.filter(fn item -> item.mood == "delighted" end)
+      |> sort_by_ascending_date()
+
+    responded_delighted_feedback =
+      raw_feedback
+      |> Enum.filter(fn item -> item.response != nil end)
+      |> Enum.filter(fn item -> item.mood == "delighted" end)
+      |> sort_by_ascending_date()
+
+    render conn, "delighted.html", delighted_feedback: delighted_feedback, responded_delighted_feedback: responded_delighted_feedback
+  end
+
+  def neutral(conn, _params) do
+    raw_feedback = Repo.all(Feedback)
+    neutral_feedback =
+      raw_feedback
+      |> Enum.filter(fn item -> item.response == nil end)
+      |> Enum.filter(fn item -> item.mood == "neutral" end)
+      |> sort_by_ascending_date()
+
+    responded_neutral_feedback =
+      raw_feedback
+      |> Enum.filter(fn item -> item.response != nil end)
+      |> Enum.filter(fn item -> item.mood == "neutral" end)
+      |> sort_by_ascending_date()
+
+    render conn, "neutral.html", neutral_feedback: neutral_feedback, responded_neutral_feedback: responded_neutral_feedback
+  end
+
+  def sad(conn, _params) do
+    raw_feedback = Repo.all(Feedback)
+    sad_feedback =
+      raw_feedback
+      |> Enum.filter(fn item -> item.response == nil end)
+      |> Enum.filter(fn item -> item.mood == "sad" end)
+      |> sort_by_ascending_date()
+
+    responded_sad_feedback =
+      raw_feedback
+      |> Enum.filter(fn item -> item.response != nil end)
+      |> Enum.filter(fn item -> item.mood == "sad" end)
+      |> sort_by_ascending_date()
+
+    render conn, "sad.html", sad_feedback: sad_feedback, responded_sad_feedback: responded_sad_feedback
+  end
+
+  def angry(conn, _params) do
+    raw_feedback = Repo.all(Feedback)
+    angry_feedback =
+      raw_feedback
+      |> Enum.filter(fn item -> item.response == nil end)
+      |> Enum.filter(fn item -> item.mood == "angry" end)
+      |> sort_by_ascending_date()
+
+    responded_angry_feedback =
+      raw_feedback
+      |> Enum.filter(fn item -> item.response != nil end)
+      |> Enum.filter(fn item -> item.mood == "angry" end)
+      |> sort_by_ascending_date()
+
+    render conn, "angry.html", angry_feedback: angry_feedback, responded_angry_feedback: responded_angry_feedback
+  end
+
 
   defp generate_permalink_string(length) do
     :crypto.strong_rand_bytes(length) |> Base.url_encode64 |> binary_part(0, length)

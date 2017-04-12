@@ -30,7 +30,7 @@ defmodule Feedback.FeedbackControllerTest do
       conn
       |> assign(:current_user, user)
     conn = get conn, feedback_path(conn, :index)
-    assert html_response(conn, 200) =~ "Feedback Dashboard"
+    assert html_response(conn, 200) =~ "category"
   end
 
   test "/feedback/:id", %{conn: conn} do
@@ -54,5 +54,60 @@ defmodule Feedback.FeedbackControllerTest do
     feedback = insert_feedback()
     conn = put conn, feedback_path(conn, :update, feedback.id, %{"feedback" => %{"submitter_email" => "invalid_email_format"}})
     assert html_response(conn, 200) =~ "feedback"
+  end
+
+  test "/happy", %{conn: conn} do
+    insert_feedback()
+    insert_feedback(%{response: "response"})
+    user = insert_validated_user()
+    conn =
+      conn
+      |> assign(:current_user, user)
+    conn = get conn, feedback_path(conn, :happy)
+    assert html_response(conn, 200) =~ "happy"
+  end
+
+  test "/delighted", %{conn: conn} do
+    insert_feedback(%{mood: "delighted"})
+    insert_feedback(%{response: "response"})
+    user = insert_validated_user()
+    conn =
+      conn
+      |> assign(:current_user, user)
+    conn = get conn, feedback_path(conn, :delighted)
+    assert html_response(conn, 200) =~ "delighted"
+  end
+
+  test "/neutral", %{conn: conn} do
+    insert_feedback(%{mood: "neutral"})
+    insert_feedback(%{response: "response"})
+    user = insert_validated_user()
+    conn =
+      conn
+      |> assign(:current_user, user)
+    conn = get conn, feedback_path(conn, :neutral)
+    assert html_response(conn, 200) =~ "neutral"
+  end
+
+  test "/sad", %{conn: conn} do
+    insert_feedback(%{mood: "sad"})
+    insert_feedback(%{response: "response"})
+    user = insert_validated_user()
+    conn =
+      conn
+      |> assign(:current_user, user)
+    conn = get conn, feedback_path(conn, :sad)
+    assert html_response(conn, 200) =~ "sad"
+  end
+
+  test "/angry", %{conn: conn} do
+    insert_feedback(%{mood: "angry"})
+    insert_feedback(%{response: "response"})
+    user = insert_validated_user()
+    conn =
+      conn
+      |> assign(:current_user, user)
+    conn = get conn, feedback_path(conn, :angry)
+    assert html_response(conn, 200) =~ "angry"
   end
 end

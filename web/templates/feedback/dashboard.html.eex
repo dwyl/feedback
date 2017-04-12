@@ -1,0 +1,40 @@
+<a class="link" href="/feedback">
+  <div class="back-button">Back</div>
+</a>
+<div class="title feedback-dashboard-title"><%= @emotion %> Feedback</div>
+
+<%= for feedback <- @feedback do %>
+  <a class="link" href="/feedback/<%= feedback.permalink_string %>">
+    <div class="feedback-item">
+      <%= truncate_text(feedback.item, 32) %>
+      <br />
+      <div class="feedback-item-date"><%= format_date(feedback.inserted_at) %></div>
+    </div>
+  </a>
+<% end %>
+<%= if length(@feedback) == 0 do %>
+  <div class="feedback-response-message">
+    Looks like you don't have any new <%= @emotion %> feedback yet! You will be notified through email
+    once there is!
+  </div>
+<% end %>
+<%= if length(@responded_feedback) > 0 do %>
+  <div class="responded-container">
+    <div class="horizontal-spacer-responded"></div>
+    <div class="responded">RESPONDED</div>
+    <div class="horizontal-spacer-responded"></div>
+  </div>
+<% end %>
+
+<%= for responded_feedback <- @responded_feedback do %>
+  <a class="link" href="/feedback/<%= responded_feedback.permalink_string %>">
+    <div class="feedback-item">
+      <%= truncate_text(responded_feedback.item, 32) %>
+      <br />
+      <div class="feedback-item-date"><%= format_date(responded_feedback.inserted_at) %></div>
+      <%= if responded_feedback.response do %>
+        <img class="feedback-responded" src="/images/tick.svg" />
+      <% end %>
+    </div>
+  </a>
+<% end %>
