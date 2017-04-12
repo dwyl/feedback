@@ -22,6 +22,12 @@
     <% end %>
   </div>
   <div class="feedback-question">Tell us your thoughts.</div>
+  <div class="feedback-anonymous-hint">
+    (To help retain your <span class="highlight">anonymity</span>, use
+    <span class="highlight">short</span> and <span class="highlight">concise</span>
+    sentences so it is more <span class="highlight">difficult</span> to
+    <span class="highlight">identify</span> you by your writing style!)
+  </div>
   <div class="form-group">
     <%= textarea f, :item, placeholder: "What's on your mind?", class: "text_area top-buffer" %>
     <%= error_tag f, :item %>
