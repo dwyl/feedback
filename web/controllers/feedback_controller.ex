@@ -75,7 +75,7 @@ defmodule Feedback.FeedbackController do
 
   def happy(conn, _params) do
     feedback = get_feedback("happy")
-    responded_feedback = get_responses("happy")
+    responded_feedback = get_responded_feedback("happy")
 
     render conn, "happy.html", layout: {LayoutView, "nav.html"}, feedback: feedback, responded_feedback: responded_feedback
   end
@@ -83,28 +83,28 @@ defmodule Feedback.FeedbackController do
 
   def delighted(conn, _params) do
     feedback = get_feedback("delighted")
-    responded_feedback = get_responses("delighted")
+    responded_feedback = get_responded_feedback("delighted")
 
     render conn, "delighted.html", layout: {LayoutView, "nav.html"}, feedback: feedback, responded_feedback: responded_feedback
   end
 
   def neutral(conn, _params) do
     feedback = get_feedback("neutral")
-    responded_feedback = get_responses("neutral")
+    responded_feedback = get_responded_feedback("neutral")
 
     render conn, "neutral.html", layout: {LayoutView, "nav.html"}, feedback: feedback, responded_feedback: responded_feedback
   end
 
   def sad(conn, _params) do
     feedback = get_feedback("sad")
-    responded_feedback = get_responses("sad")
+    responded_feedback = get_responded_feedback("sad")
 
     render conn, "sad.html", layout: {LayoutView, "nav.html"}, feedback: feedback, responded_feedback: responded_feedback
   end
 
   def angry(conn, _params) do
     feedback = get_feedback("angry")
-    responded_feedback = get_responses("angry")
+    responded_feedback = get_responded_feedback("angry")
 
     render conn, "angry.html", layout: {LayoutView, "nav.html"}, feedback: feedback, responded_feedback: responded_feedback
   end
@@ -146,7 +146,7 @@ defmodule Feedback.FeedbackController do
    feedback
   end
 
-  defp get_responses(emotion) do
+  defp get_responded_feedback(emotion) do
     raw_feedback = Repo.all(Feedback)
     responded_feedback =
     raw_feedback
