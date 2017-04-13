@@ -1,7 +1,9 @@
 <div>
-  <a href="/<%= @feedback.mood %>">
-    <img class="back-arrow" src="/images/back-arrow-button.svg" />
-  </a>
+  <%= if @conn.assigns.current_user do %>
+    <a href="/<%= @feedback.mood %>">
+      <img class="back-arrow" src="/images/back-arrow-button.svg" />
+    </a>
+  <% end %>
   <%= if !@conn.assigns.current_user do %>
     <div class="feedback-code-container">
       Here's your feedback code: <span class="highlight"><%= @feedback.permalink_string %></span>

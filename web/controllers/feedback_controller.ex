@@ -5,36 +5,12 @@ defmodule Feedback.FeedbackController do
   plug :authenticate when action in [:index, :angry, :upset, :neutral, :happy, :delighted]
 
   def index(conn, _params) do
-    raw_feedback = Repo.all(Feedback)
-    happy_feedback =
-      raw_feedback
-      |> Enum.filter(fn item -> item.response == nil end)
-      |> Enum.filter(fn item -> item.mood == "happy" end)
-      |> sort_by_ascending_date()
 
-    delighted_feedback =
-      raw_feedback
-      |> Enum.filter(fn item -> item.response == nil end)
-      |> Enum.filter(fn item -> item.mood == "delighted" end)
-      |> sort_by_ascending_date()
-
-    neutral_feedback =
-      raw_feedback
-      |> Enum.filter(fn item -> item.response == nil end)
-      |> Enum.filter(fn item -> item.mood == "neutral" end)
-      |> sort_by_ascending_date()
-
-    angry_feedback =
-      raw_feedback
-      |> Enum.filter(fn item -> item.response == nil end)
-      |> Enum.filter(fn item -> item.mood == "angry" end)
-      |> sort_by_ascending_date()
-
-    sad_feedback =
-      raw_feedback
-      |> Enum.filter(fn item -> item.response == nil end)
-      |> Enum.filter(fn item -> item.mood == "sad" end)
-      |> sort_by_ascending_date()
+    happy_feedback = get_feedback("happy")
+    delighted_feedback = get_feedback("delighted")
+    neutral_feedback = get_feedback("neutral")
+    angry_feedback = get_feedback("angry")
+    sad_feedback = get_feedback("sad")
 
     emotions = [
       {"delighted", delighted_feedback},
