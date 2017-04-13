@@ -56,6 +56,7 @@ body {
   margin: 0.5rem;
   border-radius: 5px;
   position: relative;
+  box-shadow: 1px 1px 5px #888888;
 }
 
 .dashboard-info {
@@ -154,6 +155,7 @@ body {
   color: #ffffff;
   margin-bottom: 1rem;
   position: relative;
+  box-shadow: 2px 2px 5px #888888;
 }
 
 .feedback-item-container {
@@ -288,6 +290,7 @@ body {
   border-bottom: 1px solid #4ABDAC;
   margin-bottom: 2rem;
   background-color: #4ABDAC;
+  box-shadow: 2px 2px 5px #888888;
 }
 
 .or {
