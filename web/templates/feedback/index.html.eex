@@ -2,7 +2,7 @@
 
 <div class="dashboard-container">
   <div class="dashboard-info-container">
-    <div>Click on an emotion to see the feedback from that category!</div>
+    <div>Click on an emotion to see feedback from that category!</div>
   </div>
   <%= for {emotion, feedback} <- @emotions do %>
     <a href="/<%= emotion %>">
