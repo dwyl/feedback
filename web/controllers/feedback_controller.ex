@@ -98,89 +98,39 @@ defmodule Feedback.FeedbackController do
   end
 
   def happy(conn, _params) do
-    raw_feedback = Repo.all(Feedback)
-    happy_feedback =
-      raw_feedback
-      |> Enum.filter(fn item -> item.response == nil end)
-      |> Enum.filter(fn item -> item.mood == "happy" end)
-      |> sort_by_ascending_date()
+    feedback = get_feedback("happy")
+    responded_feedback = get_responses("happy")
 
-    responded_happy_feedback =
-      raw_feedback
-      |> Enum.filter(fn item -> item.response != nil end)
-      |> Enum.filter(fn item -> item.mood == "happy" end)
-      |> sort_by_ascending_date()
-
-    render conn, "happy.html", happy_feedback: happy_feedback, responded_happy_feedback: responded_happy_feedback
+    render conn, "happy.html", feedback: feedback, responded_feedback: responded_feedback
   end
 
 
   def delighted(conn, _params) do
-    raw_feedback = Repo.all(Feedback)
-    delighted_feedback =
-      raw_feedback
-      |> Enum.filter(fn item -> item.response == nil end)
-      |> Enum.filter(fn item -> item.mood == "delighted" end)
-      |> sort_by_ascending_date()
+    feedback = get_feedback("delighted")
+    responded_feedback = get_responses("delighted")
 
-    responded_delighted_feedback =
-      raw_feedback
-      |> Enum.filter(fn item -> item.response != nil end)
-      |> Enum.filter(fn item -> item.mood == "delighted" end)
-      |> sort_by_ascending_date()
-
-    render conn, "delighted.html", delighted_feedback: delighted_feedback, responded_delighted_feedback: responded_delighted_feedback
+    render conn, "delighted.html", feedback: feedback, responded_feedback: responded_feedback
   end
 
   def neutral(conn, _params) do
-    raw_feedback = Repo.all(Feedback)
-    neutral_feedback =
-      raw_feedback
-      |> Enum.filter(fn item -> item.response == nil end)
-      |> Enum.filter(fn item -> item.mood == "neutral" end)
-      |> sort_by_ascending_date()
+    feedback = get_feedback("neutral")
+    responded_feedback = get_responses("neutral")
 
-    responded_neutral_feedback =
-      raw_feedback
-      |> Enum.filter(fn item -> item.response != nil end)
-      |> Enum.filter(fn item -> item.mood == "neutral" end)
-      |> sort_by_ascending_date()
-
-    render conn, "neutral.html", neutral_feedback: neutral_feedback, responded_neutral_feedback: responded_neutral_feedback
+    render conn, "neutral.html", feedback: feedback, responded_feedback: responded_feedback
   end
 
   def sad(conn, _params) do
-    raw_feedback = Repo.all(Feedback)
-    sad_feedback =
-      raw_feedback
-      |> Enum.filter(fn item -> item.response == nil end)
-      |> Enum.filter(fn item -> item.mood == "sad" end)
-      |> sort_by_ascending_date()
+    feedback = get_feedback("sad")
+    responded_feedback = get_responses("sad")
 
-    responded_sad_feedback =
-      raw_feedback
-      |> Enum.filter(fn item -> item.response != nil end)
-      |> Enum.filter(fn item -> item.mood == "sad" end)
-      |> sort_by_ascending_date()
-
-    render conn, "sad.html", sad_feedback: sad_feedback, responded_sad_feedback: responded_sad_feedback
+    render conn, "sad.html", feedback: feedback, responded_feedback: responded_feedback
   end
 
   def angry(conn, _params) do
-    raw_feedback = Repo.all(Feedback)
-    angry_feedback =
-      raw_feedback
-      |> Enum.filter(fn item -> item.response == nil end)
-      |> Enum.filter(fn item -> item.mood == "angry" end)
-      |> sort_by_ascending_date()
+    feedback = get_feedback("angry")
+    responded_feedback = get_responses("angry")
 
-    responded_angry_feedback =
-      raw_feedback
-      |> Enum.filter(fn item -> item.response != nil end)
-      |> Enum.filter(fn item -> item.mood == "angry" end)
-      |> sort_by_ascending_date()
-
-    render conn, "angry.html", angry_feedback: angry_feedback, responded_angry_feedback: responded_angry_feedback
+    render conn, "angry.html", feedback: feedback, responded_feedback: responded_feedback
   end
 
 
@@ -207,6 +157,28 @@ defmodule Feedback.FeedbackController do
         "To leave feedback, select your mood and write your thoughts in the
         textbox"
     end
+  end
+
+  defp get_feedback(emotion) do
+   raw_feedback = Repo.all(Feedback)
+   feedback =
+   raw_feedback
+   |> Enum.filter(fn item -> item.response == nil end)
+   |> Enum.filter(fn item -> item.mood == emotion end)
+   |> sort_by_ascending_date()
+
+   feedback
+  end
+
+  defp get_responses(emotion) do
+    raw_feedback = Repo.all(Feedback)
+    responded_feedback =
+    raw_feedback
+    |> Enum.filter(fn item -> item.response == nil end)
+    |> Enum.filter(fn item -> item.mood == emotion end)
+    |> sort_by_ascending_date()
+
+    responded_feedback
   end
 
 end
