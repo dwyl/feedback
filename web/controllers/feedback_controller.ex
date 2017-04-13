@@ -174,7 +174,7 @@ defmodule Feedback.FeedbackController do
     raw_feedback = Repo.all(Feedback)
     responded_feedback =
     raw_feedback
-    |> Enum.filter(fn item -> item.response == nil end)
+    |> Enum.filter(fn item -> item.response != nil end)
     |> Enum.filter(fn item -> item.mood == emotion end)
     |> sort_by_ascending_date()
 

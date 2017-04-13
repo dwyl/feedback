@@ -1,7 +1,9 @@
 <a class="link" href="/feedback">
   <div class="back-button">Back</div>
 </a>
-<div class="title feedback-dashboard-title"><%= @emotion %> Feedback</div>
+<div class="emotion-feedback-image-container">
+  <img class="emotion-feedback-image" src="/images/<%= @emotion %>.svg" />
+</div>
 
 <%= for feedback <- @feedback do %>
   <a class="link" href="/feedback/<%= feedback.permalink_string %>">
@@ -32,7 +34,7 @@
       <%= truncate_text(responded_feedback.item, 32) %>
       <br />
       <div class="feedback-item-date"><%= format_date(responded_feedback.inserted_at) %></div>
-      <%= if responded_feedback.response do %>
+      <%= if responded_feedback.response != nil do %>
         <img class="feedback-responded" src="/images/tick.svg" />
       <% end %>
     </div>

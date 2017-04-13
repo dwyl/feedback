@@ -78,6 +78,15 @@
   min-height: 7rem;
 }
 
+.emotion-feedback-image {
+  width: 12rem;
+}
+
+.emotion-feedback-image-container {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
 .feedback-anonymous-hint {
   text-align: center;
   font-style: italic;
