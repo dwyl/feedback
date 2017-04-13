@@ -1,5 +1,5 @@
-<a class="link" href="/feedback">
-  <div class="back-button">Back</div>
+<a href="/">
+  <img class="back-arrow" src="/images/back-arrow-button.svg" />
 </a>
 <div class="emotion-feedback-image-container">
   <img class="emotion-feedback-image" src="/images/<%= @emotion %>.svg" />

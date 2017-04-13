@@ -1,6 +1,6 @@
 defmodule Feedback.FeedbackController do
   use Feedback.Web, :controller
-  alias Feedback.Feedback
+  alias Feedback.{Feedback, LayoutView}
 
   plug :authenticate when action in [:index, :angry, :upset, :neutral, :happy, :delighted]
 
@@ -43,7 +43,7 @@ defmodule Feedback.FeedbackController do
       {"sad", sad_feedback},
       {"angry", angry_feedback}]
 
-    render conn, "index.html", emotions: emotions
+    render conn, "index.html", layout: {LayoutView, "nav.html"}, emotions: emotions
 
   end
 
@@ -61,7 +61,7 @@ defmodule Feedback.FeedbackController do
         |> redirect(to: page_path(conn, :index))
       feedback ->
         changeset = Feedback.changeset(feedback)
-        render conn, "show.html", feedback: feedback, changeset: changeset
+        render conn, "show.html", layout: {LayoutView, "nav.html"}, feedback: feedback, changeset: changeset
     end
   end
 
@@ -101,7 +101,7 @@ defmodule Feedback.FeedbackController do
     feedback = get_feedback("happy")
     responded_feedback = get_responses("happy")
 
-    render conn, "happy.html", feedback: feedback, responded_feedback: responded_feedback
+    render conn, "happy.html", layout: {LayoutView, "nav.html"}, feedback: feedback, responded_feedback: responded_feedback
   end
 
 
@@ -109,28 +109,28 @@ defmodule Feedback.FeedbackController do
     feedback = get_feedback("delighted")
     responded_feedback = get_responses("delighted")
 
-    render conn, "delighted.html", feedback: feedback, responded_feedback: responded_feedback
+    render conn, "delighted.html", layout: {LayoutView, "nav.html"}, feedback: feedback, responded_feedback: responded_feedback
   end
 
   def neutral(conn, _params) do
     feedback = get_feedback("neutral")
     responded_feedback = get_responses("neutral")
 
-    render conn, "neutral.html", feedback: feedback, responded_feedback: responded_feedback
+    render conn, "neutral.html", layout: {LayoutView, "nav.html"}, feedback: feedback, responded_feedback: responded_feedback
   end
 
   def sad(conn, _params) do
     feedback = get_feedback("sad")
     responded_feedback = get_responses("sad")
 
-    render conn, "sad.html", feedback: feedback, responded_feedback: responded_feedback
+    render conn, "sad.html", layout: {LayoutView, "nav.html"}, feedback: feedback, responded_feedback: responded_feedback
   end
 
   def angry(conn, _params) do
     feedback = get_feedback("angry")
     responded_feedback = get_responses("angry")
 
-    render conn, "angry.html", feedback: feedback, responded_feedback: responded_feedback
+    render conn, "angry.html", layout: {LayoutView, "nav.html"}, feedback: feedback, responded_feedback: responded_feedback
   end
 
 

@@ -6,12 +6,26 @@
   text-align: center;
 }
 
+.back-arrow {
+  width: 3rem;
+  margin-bottom: 1rem;
+}
+
 .back-button {
   display: inline-block;
-  border: 1px solid;
+  border: 1px solid #4ABDAC;
   border-radius: 5px;
   padding: 0.5rem;
   margin-bottom: 1rem;
+  background-color: #4ABDAC;
+  color: #ffffff;
+  margin-top: 1rem;
+  margin-right: 1rem;
+  float: right;
+}
+
+body {
+  margin-top: 0;
 }
 
 .button {
@@ -68,9 +82,16 @@
   width: 6rem;
 }
 
+.dwyl-logo-white {
+  width: 4rem;
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+}
+
 .dwyl-logo-container {
   text-align: center;
   margin-bottom: 1rem;
+  margin-top: 2rem;
 }
 
 .emotion-container {
@@ -162,15 +183,19 @@
 
 .feedback-notification {
   display: inline-block;
-  position: absolute;
-  right: -1rem;
-  top: -1rem;
-  color: #ffffff;
-  background-color: #e74c3c;
-  border-radius: 100%;
-  padding: 0.5rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+    position: absolute;
+    right: -1rem;
+    top: -1rem;
+    color: #ffffff;
+    background-color: #e74c3c;
+    border-radius: 100%;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    min-width: 3.5rem;
+    min-height: 3.5rem;
+    text-align: center;
+    padding-top: 0.75rem;
 }
 
 .feedback-question {
@@ -251,15 +276,18 @@
   text-decoration: none;
 }
 
-.logout-button {
-  padding-right: 0.5rem;
-}
-
 .mood-image {
   width: 3rem;
   position: absolute;
   right: 1rem;
   top: 0.5rem;
+}
+
+.navigation {
+  min-height: 5rem;
+  border-bottom: 1px solid #4ABDAC;
+  margin-bottom: 2rem;
+  background-color: #4ABDAC;
 }
 
 .or {
@@ -310,7 +338,7 @@
 .title {
   text-align: center;
   font-size: 2.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .top-buffer {

@@ -56,7 +56,7 @@ socket.connect()
 // Now that you are connected, you can join channels with a topic:
 let channel        = socket.channel("room:lobby", {});
 let responseButton = document.getElementById("response-button");
-let feedbackButton = document.getElementById("feedback-button");
+// let feedbackButton = document.getElementById("feedback-button");
 
 channel.join()
   .receive("ok", resp => { console.log("Sockets initialised", resp) })
@@ -68,11 +68,11 @@ if (responseButton !== null) {
   })
 }
 
-if (feedbackButton !== null) {
-  feedbackButton.addEventListener("click", event => {
-    channel.push("responded", {body: "responded"})
-  })
-}
+// if (feedbackButton !== null) {
+//   feedbackButton.addEventListener("click", event => {
+//     channel.push("responded", {body: "responded"})
+//   })
+// }
 
 channel.on("responded", payload => {
   setTimeout(function () {

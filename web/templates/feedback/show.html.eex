@@ -1,14 +1,7 @@
 <div>
-  <%= if !@conn.assigns.current_user do %>
-    <a class="link" href="/feedback/new">
-      <div class="back-button">Leave more feedback</div>
-    </a>
-  <% end %>
-  <%= if @conn.assigns.current_user do %>
-    <a class="link" href="/feedback">
-      <div class="back-button">Back</div>
-    </a>
-  <% end %>
+  <a href="/<%= @feedback.mood %>">
+    <img class="back-arrow" src="/images/back-arrow-button.svg" />
+  </a>
   <%= if !@conn.assigns.current_user do %>
     <div class="feedback-code-container">
       Here's your feedback code: <span class="highlight"><%= @feedback.permalink_string %></span>

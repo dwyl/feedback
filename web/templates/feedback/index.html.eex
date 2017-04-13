@@ -1,10 +1,6 @@
-<div class="logout-button">
-  <%= link "Log out", to: session_path(@conn, :delete, @current_user), method: "delete", class: "logout-button back-button link" %>
-</div>
-
 <div class="feedback-dashboard-title title">Feeback Categories</div>
 
-<div class="dashboard-container top-buffer">
+<div class="dashboard-container">
   <div class="dashboard-info-container">
     <div>Click on an emotion to see the feedback from that category!</div>
   </div>
