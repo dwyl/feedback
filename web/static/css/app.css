@@ -24,6 +24,10 @@
   float: right;
 }
 
+.back-button:hover {
+  color: #ffffff;
+}
+
 body {
   margin-top: 0;
 }
@@ -51,7 +55,6 @@ body {
 
 .dashboard-emotion-container {
   display: inline-block;
-  border: 1px solid lightblue;
   padding: 2rem;
   margin: 0.5rem;
   border-radius: 5px;
@@ -164,6 +167,7 @@ body {
   border-radius: 5px;
   margin-bottom: 1rem;
   position: relative;
+  box-shadow: 2px 2px 5px #888888;
 }
 
 .feedback-item-date {
@@ -217,6 +221,7 @@ body {
   border: 1px solid lightgray;
   padding: 1rem;
   border-radius: 5px;
+  box-shadow: 2px 2px 5px #888888;
 }
 
 .feedback-response-title {
@@ -303,6 +308,37 @@ body {
 .or-container {
   text-align: center;
   padding: 1rem;
+}
+
+.padlock {
+  width: 2.5rem;
+  position: absolute;
+  right: 4.5rem;
+  top: 0.7rem;
+}
+
+.privacy-toggle-container {
+  position: relative;
+  text-align: center;
+  width: 20rem;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+}
+
+.private {
+  font-size: 2rem;
+  position: absolute;
+  top: 0.4rem;
+  color: #4ABDAC;
+  left: -0.5rem;
+}
+
+.public {
+  font-size: 2rem;
+  position: absolute;
+  right: 0;
+  top: 0.4rem;
+  color: #B5B5B5;
 }
 
 .responded {
@@ -458,4 +494,60 @@ input:checked + label {
     height: 18rem;
     width: 18rem;
   }
+}
+
+/* toggle css */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #4ABDAC;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #ccc;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #ccc;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }

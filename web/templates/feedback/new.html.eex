@@ -32,5 +32,13 @@
     <%= textarea f, :item, placeholder: "What's on your mind?", class: "text_area top-buffer" %>
     <%= error_tag f, :item %>
   </div>
-  <%= submit "Send", [class: "button", id: "feedback-button"] %>
+  <div class="privacy-toggle-container">
+    <div class="private">Private</div>
+    <div class="public">Public</div>
+    <label class="switch">
+      <%= checkbox f, :public %>
+      <div class="slider round"></div>
+    </label>
+  </div>
+  <%= submit "Share", [class: "button", id: "feedback-button"] %>
 <% end %>

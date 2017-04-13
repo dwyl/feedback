@@ -8,13 +8,21 @@ defmodule Feedback.Feedback do
     field :submitter_email, :string
     field :permalink_string, :string
     field :mood, :string
+    field :public, :boolean
 
     timestamps()
   end
 
   def changeset(struct, params \\ :invalid) do
     struct
-    |> cast(params, [:item, :response, :responded, :submitter_email, :permalink_string, :mood])
+    |> cast(params, [
+      :item,
+      :response,
+      :responded,
+      :submitter_email,
+      :permalink_string,
+      :mood,
+      :public])
     |> validate_format(:submitter_email, ~r/@/)
     |> validate_required([:item, :permalink_string, :mood])
   end

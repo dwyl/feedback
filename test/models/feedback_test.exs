@@ -9,7 +9,8 @@ defmodule Feedback.FeedbackTest do
     responded: true,
     submitter_email: "test@email.com",
     permalink_string: "long-and-un-guessable",
-    mood: "happy"
+    mood: "happy",
+    public: false
   }
   @invalid_attrs %{}
 
@@ -33,6 +34,7 @@ defmodule Feedback.FeedbackTest do
        :submitter_email,
        :permalink_string,
        :mood,
+       :public,
        :inserted_at,
        :updated_at
      ]

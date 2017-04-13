@@ -44,6 +44,9 @@
   <% end %>
   <div class="feedback-item-container">
     <img class="mood-image" src="/images/<%= @feedback.mood %>.svg" />
+    <%= if !@feedback.public do %>
+      <img class="padlock" src="/images/locked.svg" />
+    <% end %>
     <div class="feedback-item-title">Feedback -
       <span class="feedback-date"><%= format_date(@feedback.inserted_at) %></span>
     </div>
