@@ -50,7 +50,7 @@ defmodule Feedback.FeedbackControllerTest do
       conn
       |> put_req_header("referer", "http://localhost:4000/forum")
     conn = put conn, feedback_path(conn, :update, feedback.id, %{"feedback" => %{"response" => "response"}})
-    assert redirected_to(conn, 302) =~ "/forum/#{feedback.permalink_string}"
+    assert redirected_to(conn, 302) =~ "/forum/#{feedback.id}"
   end
 
   test "/feedback/:id update different request header", %{conn: conn} do
@@ -121,22 +121,5 @@ defmodule Feedback.FeedbackControllerTest do
       |> assign(:current_user, user)
     conn = get conn, feedback_path(conn, :angry)
     assert html_response(conn, 200) =~ "angry"
-  end
-
-  test "/forum", %{conn: conn} do
-    insert_feedback(%{public: true})
-    conn = get conn, feedback_path(conn, :forum)
-    assert html_response(conn, 200) =~ "Forum"
-  end
-
-  test "/forum/:id", %{conn: conn} do
-    feedback = insert_feedback(%{public: true})
-    conn = get conn, feedback_path(conn, :forum_show, feedback.permalink_string)
-    assert html_response(conn, 200) =~ "Feedback"
-  end
-
-  test "/forum/:id invalid", %{conn: conn} do
-    conn = get conn, feedback_path(conn, :forum_show, 1)
-    assert redirected_to(conn, 302) =~ "/"
   end
 end
