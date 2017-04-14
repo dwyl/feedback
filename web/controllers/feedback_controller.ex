@@ -26,7 +26,7 @@ defmodule Feedback.FeedbackController do
   def new(conn, _params) do
     changeset = Feedback.changeset(%Feedback{})
     emotions = ["angry", "sad", "neutral", "happy", "delighted"]
-    render conn, "new.html", changeset: changeset, emotions: emotions
+    render conn, "new.html", layout: {LayoutView, "index.html"}, changeset: changeset, emotions: emotions
   end
 
   def show(conn, %{"id" => permalink}) do
@@ -46,9 +46,17 @@ defmodule Feedback.FeedbackController do
     changeset = Feedback.changeset(feedback, feedback_params)
     case Repo.update(changeset) do
       {:ok, feedback} ->
-        conn
-        |> put_flash(:info, "Success!")
-        |> redirect(to: feedback_path(conn, :show, feedback.permalink_string))
+        case get_referer(conn.req_headers) do
+          "forum" ->
+            conn
+            |> put_flash(:info, "Success!")
+            |> redirect(to: feedback_path(conn, :forum_show, feedback.permalink_string))
+          _other ->
+            conn
+            |> put_flash(:info, "Success!")
+            |> redirect(to: feedback_path(conn, :show, feedback.permalink_string))
+        end
+
       {:error, changeset} ->
         render conn, "show.html", feedback: feedback, changeset: changeset
     end
@@ -70,6 +78,27 @@ defmodule Feedback.FeedbackController do
         |> put_flash(:error, "Oops! Something went wrong. #{error}")
         |> redirect(to: feedback_path(conn, :new))
         |> halt()
+    end
+  end
+
+  def forum(conn, _params) do
+    raw_feedback = Repo.all(Feedback)
+    public_feedback =
+      raw_feedback
+      |> Enum.filter(fn item -> item.public end)
+      |> sort_by_ascending_date()
+    render conn, "forum.html", layout: {LayoutView, "forum.html"}, public_feedback: public_feedback
+  end
+
+  def forum_show(conn, %{"id" => permalink}) do
+    case Repo.get_by(Feedback, permalink_string: permalink) do
+      nil ->
+        conn
+        |> put_flash(:error, "That piece of feedback doesn't exist")
+        |> redirect(to: page_path(conn, :index))
+      feedback ->
+        changeset = Feedback.changeset(feedback)
+        render conn, "forum_show.html", layout: {LayoutView, "forum.html"}, feedback: feedback, changeset: changeset
     end
   end
 
@@ -155,6 +184,12 @@ defmodule Feedback.FeedbackController do
     |> sort_by_ascending_date()
 
     responded_feedback
+  end
+
+  defp get_referer(headers) do
+    [{_header, value}] = Enum.filter(headers, fn {header, _value} -> header == "referer" end)
+    path = Enum.at(String.split(value, "/"), 3)
+    path
   end
 
 end

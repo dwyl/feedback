@@ -5,15 +5,17 @@
     </a>
   <% end %>
   <%= if !@conn.assigns.current_user do %>
-    <div class="feedback-code-container">
-      Here's your feedback code: <span class="highlight"><%= @feedback.permalink_string %></span>
-      </br>
-      </br>
-      Make a note of it so that you can track the feedback response.
-      To track it, enter the url https://localhost:4000/feedback/<span class="highlight">CODE</span>
-      <br />
-      <span class="feedback-anonymous-hint">(It's also the url of this page!)</span>
-    </div>
+    <%= if @feedback.response == nil do %>
+      <div class="feedback-code-container">
+        Here's your feedback code: <span class="highlight"><%= @feedback.permalink_string %></span>
+        </br>
+        </br>
+        Make a note of it so that you can track the feedback response.
+        To track it, enter the url https://localhost:4000/feedback/<span class="highlight">CODE</span>
+        <br />
+        <span class="feedback-anonymous-hint">(It's also the url of this page!)</span>
+      </div>
+    <% end %>
     <%= if @feedback.submitter_email == nil && @feedback.response == nil do %>
     <div class="or-container">
       <div class="horizontal-spacer"></div>

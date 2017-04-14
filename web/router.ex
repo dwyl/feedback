@@ -21,6 +21,8 @@ defmodule Feedback.Router do
     get "/neutral", FeedbackController, :neutral
     get "/sad", FeedbackController, :sad
     get "/angry", FeedbackController, :angry
+    get "/forum", FeedbackController, :forum
+    get "/forum/:id", FeedbackController, :forum_show
   end
 
 end

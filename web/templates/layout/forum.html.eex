@@ -23,10 +23,10 @@
       <% end %>
       <%= if @current_user do %>
           <%= link "Log out", to: session_path(@conn, :delete, @current_user), method: "delete", class: "back-button link" %>
+          <a href="/feedback">
+            <div class="back-button">Dashboard</div>
+          </a>
       <% end %>
-      <a class="link" href="/forum">
-        <div class="back-button">Forum</div>
-      </a>
     </div>
     <div class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>

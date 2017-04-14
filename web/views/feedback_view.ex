@@ -38,4 +38,5 @@ defmodule Feedback.FeedbackView do
         day <> "/" <> month <> "/" <> year
     end
   end
+
 end
