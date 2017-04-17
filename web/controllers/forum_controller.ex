@@ -11,7 +11,7 @@ defmodule Feedback.ForumController do
     render conn, "forum.html", layout: {LayoutView, "forum.html"}, public_feedback: public_feedback
   end
 
-  def forum_show(conn, %{"id" => id} = params) do
+  def forum_show(conn, %{"id" => id}) do
     case Repo.get_by(Feedback, id: id) do
       nil ->
         conn
