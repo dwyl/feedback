@@ -44,21 +44,34 @@ defmodule Feedback.FeedbackController do
   def update(conn, %{"id" => id, "feedback" => feedback_params}) do
     feedback = Repo.get!(Feedback, id)
     changeset = Feedback.changeset(feedback, feedback_params)
-    case Repo.update(changeset) do
-      {:ok, feedback} ->
-        case get_referer(conn.req_headers) do
-          "forum" ->
-            conn
-            |> put_flash(:info, "Success!")
-            |> redirect(to: forum_path(conn, :forum_show, feedback.id))
-          _other ->
-            conn
-            |> put_flash(:info, "Success!")
-            |> redirect(to: feedback_path(conn, :show, feedback.permalink_string))
-        end
-
-      {:error, changeset} ->
-        render conn, "show.html", feedback: feedback, changeset: changeset
+    case Map.has_key?(feedback_params, "response") do
+       true ->
+         case Repo.update(changeset) do
+           {:ok, feedback} ->
+             case get_referer(conn.req_headers) do
+               "forum" ->
+                 send_response_email_if_exists(feedback)
+                 conn
+                 |> put_flash(:info, "Response sent successfully!")
+                 |> redirect(to: forum_path(conn, :forum_show, feedback.id))
+               _other ->
+                 send_response_email_if_exists(feedback)
+                 conn
+                 |> put_flash(:info, "Response sent successfully!")
+                 |> redirect(to: feedback_path(conn, :show, feedback.permalink_string))
+             end
+           {:error, changeset} ->
+             render conn, "show.html", feedback: feedback, changeset: changeset
+         end
+        false ->
+          case Repo.update(changeset) do
+            {:ok, _email} ->
+              conn
+              |> put_flash(:info, "Email submitted successfully!")
+              |> redirect(to: feedback_path(conn, :show, feedback.permalink_string))
+            {:error, changeset} ->
+              render conn, "show.html", feedback: feedback, changeset: changeset
+          end
     end
   end
 
@@ -80,27 +93,6 @@ defmodule Feedback.FeedbackController do
         |> halt()
     end
   end
-
-  # def forum(conn, _params) do
-  #   raw_feedback = Repo.all(Feedback)
-  #   public_feedback =
-  #     raw_feedback
-  #     |> Enum.filter(fn item -> item.public end)
-  #     |> sort_by_ascending_date()
-  #   render conn, "forum.html", layout: {LayoutView, "forum.html"}, public_feedback: public_feedback
-  # end
-  #
-  # def forum_show(conn, %{"id" => permalink}) do
-  #   case Repo.get_by(Feedback, permalink_string: permalink) do
-  #     nil ->
-  #       conn
-  #       |> put_flash(:error, "That piece of feedback doesn't exist")
-  #       |> redirect(to: page_path(conn, :index))
-  #     feedback ->
-  #       changeset = Feedback.changeset(feedback)
-  #       render conn, "forum_show.html", layout: {LayoutView, "forum.html"}, feedback: feedback, changeset: changeset
-  #   end
-  # end
 
   def happy(conn, _params) do
     feedback = get_feedback("happy")
@@ -137,59 +129,5 @@ defmodule Feedback.FeedbackController do
 
     render conn, "angry.html", layout: {LayoutView, "nav.html"}, feedback: feedback, responded_feedback: responded_feedback
   end
-
-
-  # defp generate_permalink_string(length) do
-  #   :crypto.strong_rand_bytes(length) |> Base.url_encode64 |> binary_part(0, length)
-  # end
-  #
-  # def sort_by_ascending_date(enum) do
-  #   enum |> Enum.sort(&(&1.inserted_at >= &2.inserted_at))
-  # end
-  #
-  # defp format_error(changeset) do
-  #   errors = changeset.errors
-  #   case length(errors) do
-  #     1 ->
-  #       {key, _} = Enum.at(errors, 0)
-  #       case key do
-  #         :item ->
-  #           "Make sure you write something in the feedback textbox"
-  #         :mood ->
-  #           "Make sure you select your mood"
-  #       end
-  #     2 ->
-  #       "To leave feedback, select your mood and write your thoughts in the
-  #       textbox"
-  #   end
-  # end
-  #
-  # defp get_feedback(emotion) do
-  #  raw_feedback = Repo.all(Feedback)
-  #  feedback =
-  #  raw_feedback
-  #  |> Enum.filter(fn item -> item.response == nil end)
-  #  |> Enum.filter(fn item -> item.mood == emotion end)
-  #  |> sort_by_ascending_date()
-  #
-  #  feedback
-  # end
-  #
-  # defp get_responded_feedback(emotion) do
-  #   raw_feedback = Repo.all(Feedback)
-  #   responded_feedback =
-  #   raw_feedback
-  #   |> Enum.filter(fn item -> item.response != nil end)
-  #   |> Enum.filter(fn item -> item.mood == emotion end)
-  #   |> sort_by_ascending_date()
-  #
-  #   responded_feedback
-  # end
-  #
-  # defp get_referer(headers) do
-  #   [{_header, value}] = Enum.filter(headers, fn {header, _value} -> header == "referer" end)
-  #   path = Enum.at(String.split(value, "/"), 3)
-  #   path
-  # end
 
 end

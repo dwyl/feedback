@@ -1,5 +1,8 @@
 defmodule Feedback.FeedbackControllerTest do
   use Feedback.ConnCase, async: false
+  alias Feedback.{Email, Mailer}
+
+  import Mock
 
   test "/feedback/new", %{conn: conn} do
     conn = get conn, "/feedback/new"
@@ -54,18 +57,35 @@ defmodule Feedback.FeedbackControllerTest do
   end
 
   test "/feedback/:id update different request header", %{conn: conn} do
+    feedback = insert_feedback(%{submitter_email: "test@email.com"})
+    with_mock Mailer, [deliver_now: fn(_) -> nil end] do
+      conn =
+        conn
+        |> put_req_header("referer", "http://localhost:4000/feedback")
+      conn = put conn, feedback_path(conn, :update, feedback.id, %{"feedback" => %{"response" => "response"}})
+      assert redirected_to(conn, 302) =~ "/feedback/#{feedback.permalink_string}"
+    end
+  end
+
+  test "/feedback/:id update error email", %{conn: conn} do
+    feedback = insert_feedback()
+    conn = put conn, feedback_path(conn, :update, feedback.id, %{"feedback" => %{"submitter_email" => "invalid_email_format"}})
+    assert html_response(conn, 200) =~ "feedback"
+  end
+
+  test "/feedback/:id update error response", %{conn: conn} do
     feedback = insert_feedback()
     conn =
       conn
       |> put_req_header("referer", "http://localhost:4000/feedback")
-    conn = put conn, feedback_path(conn, :update, feedback.id, %{"feedback" => %{"response" => "response"}})
-    assert redirected_to(conn, 302) =~ "/feedback/#{feedback.permalink_string}"
+    conn = put conn, feedback_path(conn, :update, feedback.id, %{"feedback" => %{"response" => "a"}})
+    assert html_response(conn, 200) =~ "feedback"
   end
 
-  test "/feedback/:id update error", %{conn: conn} do
+  test "/feedback/:id update email submit", %{conn: conn} do
     feedback = insert_feedback()
-    conn = put conn, feedback_path(conn, :update, feedback.id, %{"feedback" => %{"submitter_email" => "invalid_email_format"}})
-    assert html_response(conn, 200) =~ "feedback"
+    conn = put conn, feedback_path(conn, :update, feedback.id, %{"feedback" => %{"submitter_email" => "test@email.com"}})
+    assert redirected_to(conn, 302) =~ "/feedback/#{feedback.permalink_string}"
   end
 
   test "/happy", %{conn: conn} do
@@ -121,5 +141,12 @@ defmodule Feedback.FeedbackControllerTest do
       |> assign(:current_user, user)
     conn = get conn, feedback_path(conn, :angry)
     assert html_response(conn, 200) =~ "angry"
+  end
+
+  test "strucuture of email is ok" do
+    email = Email.send_email("test@email.com", "Welcome", "Hello there")
+    assert email.to == "test@email.com"
+    assert email.subject == "Welcome"
+    assert email.text_body =~ "Hello there"
   end
 end

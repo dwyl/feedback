@@ -24,6 +24,7 @@ defmodule Feedback.Feedback do
       :mood,
       :public])
     |> validate_format(:submitter_email, ~r/@/)
+    |> validate_length(:response, min: 2)
     |> validate_required([:item, :permalink_string, :mood])
   end
 

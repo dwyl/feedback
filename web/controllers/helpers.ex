@@ -1,5 +1,5 @@
 defmodule Feedback.Controllers.Helpers do
-  alias Feedback.{Repo, Feedback}
+  alias Feedback.{Repo, Feedback, Email, Mailer}
 
   def generate_permalink_string(length) do
     :crypto.strong_rand_bytes(length) |> Base.url_encode64 |> binary_part(0, length)
@@ -52,6 +52,16 @@ defmodule Feedback.Controllers.Helpers do
     [{_header, value}] = Enum.filter(headers, fn {header, _value} -> header == "referer" end)
     path = Enum.at(String.split(value, "/"), 3)
     path
+  end
+
+  def send_response_email_if_exists(feedback) do
+    link = "http://localhost:4000/feedback/#{feedback.permalink_string}"
+    subject = "Feedback Response"
+    message = "Hi there! There has been a response to your feedback. Follow this link #{link} to view it."
+    if feedback.submitter_email != nil do
+      Email.send_email(feedback.submitter_email, subject, message)
+      |> Mailer.deliver_now()
+    end
   end
 
 end

@@ -22,3 +22,7 @@ config :feedback, Feedback.Repo,
 
 config :comeonin, :bcrypt_log_rounds, 4
 config :comeonin, :pbkdf2_rounds, 1
+
+# Configure Bamboo email
+config :feedback, Feedback.Mailer,
+  adapter: Bamboo.TestAdapter
