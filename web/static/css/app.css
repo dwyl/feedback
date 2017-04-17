@@ -450,8 +450,8 @@ input + label {
   -webkit-o-transition: all 200ms ease-in;
   -moz-o-transition: all 200ms ease-in;
   transition: all 200ms ease-in;
-  height: 3em;
-  width: 3em;
+  height: 2.5em;
+  width: 2.5em;
   position: relative;
   top: 25%;
   transform: translateY(-25%);
