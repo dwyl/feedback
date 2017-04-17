@@ -12,7 +12,7 @@ config :feedback,
 # Configures the endpoint
 config :feedback, Feedback.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "aBi07mDCHwwdqkunV/mx7LlDilXqy7GeZlrXMOm1Qxtdx9e6KfZ2BsF7O+qpZXSs",
+  secret_key_base: System.get_env("SECRET_KEY_BASE"),
   render_errors: [view: Feedback.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Feedback.PubSub,
            adapter: Phoenix.PubSub.PG2]
