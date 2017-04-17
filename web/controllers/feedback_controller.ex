@@ -83,6 +83,7 @@ defmodule Feedback.FeedbackController do
     changeset = Feedback.changeset(%Feedback{}, feedback_params)
     case Repo.insert(changeset) do
       {:ok, feedback} ->
+        send_feedback_email(feedback)
         conn
         |> put_flash(:info, "Thank you so much for your feedback!")
         |> redirect(to: feedback_path(conn, :show, feedback))

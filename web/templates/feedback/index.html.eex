@@ -1,5 +1,4 @@
 <div class="feedback-dashboard-title title">Feedback Categories</div>
-
 <div class="dashboard-container">
   <%= for {emotion, feedback} <- @emotions do %>
     <a href="/<%= emotion %>">

@@ -64,4 +64,12 @@ defmodule Feedback.Controllers.Helpers do
     end
   end
 
+  def send_feedback_email(feedback) do
+    link = "http://localhost:4000/feedback/#{feedback.permalink_string}"
+    subject = "New Feedback"
+    message = "You have a new piece of #{feedback.mood} feedback: \"#{feedback.item}\". Follow this link #{link} to respond."
+    Email.send_email(System.get_env("ADMIN_EMAIL"), subject, message)
+    |> Mailer.deliver_now()
+  end
+
 end
