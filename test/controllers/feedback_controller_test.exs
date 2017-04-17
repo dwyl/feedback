@@ -33,7 +33,7 @@ defmodule Feedback.FeedbackControllerTest do
       conn
       |> assign(:current_user, user)
     conn = get conn, feedback_path(conn, :index)
-    assert html_response(conn, 200) =~ "category"
+    assert html_response(conn, 200) =~ "Categories"
   end
 
   test "/feedback/:id", %{conn: conn} do
@@ -141,6 +141,17 @@ defmodule Feedback.FeedbackControllerTest do
       |> assign(:current_user, user)
     conn = get conn, feedback_path(conn, :angry)
     assert html_response(conn, 200) =~ "angry"
+  end
+
+  test "/confused", %{conn: conn} do
+    insert_feedback(%{mood: "confused"})
+    insert_feedback(%{response: "response"})
+    user = insert_validated_user()
+    conn =
+      conn
+      |> assign(:current_user, user)
+    conn = get conn, feedback_path(conn, :confused)
+    assert html_response(conn, 200) =~ "confused"
   end
 
   test "strucuture of email is ok" do

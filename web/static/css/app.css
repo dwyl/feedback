@@ -44,9 +44,7 @@ body {
 
 .dashboard-container {
   position: relative;
-  margin: 0 auto;
-  width: 100%;
-  display: inline-block;
+  text-align: center;
 }
 
 .dashboard-emotion {
@@ -60,6 +58,8 @@ body {
   border-radius: 5px;
   position: relative;
   box-shadow: 1px 1px 5px #888888;
+  height: 13.2rem;
+  width: 13.2rem;
 }
 
 .dashboard-info {
@@ -69,17 +69,14 @@ body {
 .dashboard-info-container {
   text-align: center;
   display: inline-block;
-  padding: 2rem;
   padding-top: 1.5rem;
   margin: 0.4rem;
   border-radius: 5px;
   position: relative;
   color: #ffffff;
   background-color: #4ABDAC;
-  float: left;
   height: 13.2rem;
   width: 13.2rem;
-  margin-right: 0.9rem;
 }
 
 .dwyl-logo {
@@ -404,7 +401,7 @@ body {
 
 /* emotion css */
 
-.delighted, .happy, .neutral, .sad, .angry {
+.delighted, .happy, .neutral, .confused, .sad, .angry {
   /* HIDE RADIO */
   visibility: hidden;
   /* Makes input not-clickable */
@@ -424,6 +421,10 @@ body {
   background-image: url("/images/neutral.svg");
 }
 
+.confused + label {
+  background-image: url("/images/confused.svg");
+}
+
 .sad + label {
   background-image: url("/images/sad.svg");
 }
@@ -432,7 +433,7 @@ body {
   background-image: url("/images/angry.svg");
 }
 
-.delighted + label::after, .happy + label::after, .neutral + label::after, .sad + label::after, .angry + label::after {
+.delighted + label::after, .happy + label::after, .neutral + label::after, .confused + label::after, .sad + label::after, .angry + label::after {
   text-align: center;
   width: 100%;
   position: relative;
@@ -496,13 +497,9 @@ input:checked + label {
   .dashboard-info-container {
     height: 18.1rem;
     width: 18.1rem;
-    padding-top: 4rem;
+    padding-top: 3.3rem;
     margin: 0.4rem;
     font-size: 1.6rem;
-    margin-right: 0.9rem;
-  }
-  .dashboard-container {
-    padding-left: 9%;
   }
   .dashboard-emotion-container {
     height: 18rem;

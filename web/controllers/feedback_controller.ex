@@ -9,6 +9,7 @@ defmodule Feedback.FeedbackController do
     happy_feedback = get_feedback("happy")
     delighted_feedback = get_feedback("delighted")
     neutral_feedback = get_feedback("neutral")
+    confused_feedback = get_feedback("confused")
     angry_feedback = get_feedback("angry")
     sad_feedback = get_feedback("sad")
 
@@ -16,6 +17,7 @@ defmodule Feedback.FeedbackController do
       {"delighted", delighted_feedback},
       {"happy", happy_feedback},
       {"neutral", neutral_feedback},
+      {"confused", confused_feedback},
       {"sad", sad_feedback},
       {"angry", angry_feedback}]
 
@@ -25,7 +27,7 @@ defmodule Feedback.FeedbackController do
 
   def new(conn, _params) do
     changeset = Feedback.changeset(%Feedback{})
-    emotions = ["angry", "sad", "neutral", "happy", "delighted"]
+    emotions = ["angry", "sad", "confused", "neutral", "happy", "delighted"]
     render conn, "new.html", layout: {LayoutView, "index.html"}, changeset: changeset, emotions: emotions
   end
 
@@ -114,6 +116,13 @@ defmodule Feedback.FeedbackController do
     responded_feedback = get_responded_feedback("neutral")
 
     render conn, "neutral.html", layout: {LayoutView, "nav.html"}, feedback: feedback, responded_feedback: responded_feedback
+  end
+
+  def confused(conn, _params) do
+    feedback = get_feedback("confused")
+    responded_feedback = get_responded_feedback("confused")
+
+    render conn, "confused.html", layout: {LayoutView, "nav.html"}, feedback: feedback, responded_feedback: responded_feedback
   end
 
   def sad(conn, _params) do
