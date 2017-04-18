@@ -1,4 +1,7 @@
 <div class="feedback-dashboard-title title">Feedback Forum</div>
+<%= if length(@public_feedback) == 0 do %>
+<div class="feedback-response-message">Looks like there isn't any public feedback yet! Please check back again later</div>
+<% end %>
 <%= for feedback <- @public_feedback do %>
   <a class="link" href="/forum/<%= feedback.id %>">
     <div class="feedback-item">

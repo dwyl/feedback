@@ -45,9 +45,11 @@ defmodule Feedback.FeedbackController do
 
   def update(conn, %{"id" => id, "feedback" => feedback_params}) do
     feedback = Repo.get!(Feedback, id)
-    changeset = Feedback.changeset(feedback, feedback_params)
     case Map.has_key?(feedback_params, "response") do
        true ->
+         response_date = DateTime.utc_now()
+         response_params = Map.put(feedback_params, "responded_at", response_date)
+         changeset = Feedback.changeset(feedback, response_params)
          case Repo.update(changeset) do
            {:ok, feedback} ->
              case get_referer(conn.req_headers) do
@@ -66,6 +68,7 @@ defmodule Feedback.FeedbackController do
              render conn, "show.html", feedback: feedback, changeset: changeset
          end
         false ->
+          changeset = Feedback.changeset(feedback, feedback_params)
           case Repo.update(changeset) do
             {:ok, _email} ->
               conn

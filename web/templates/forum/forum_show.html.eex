@@ -16,7 +16,7 @@
 <%= if @feedback.response do %>
   <div class="feedback-response-container">
     <div class="feedback-response-title">Response -
-      <span class="feedback-date"><%= format_date(@feedback.updated_at) %></span>
+      <span class="feedback-date"><%= format_date(@feedback.responded_at) %></span>
     </div>
     <div><%= @feedback.response %></div>
   </div>

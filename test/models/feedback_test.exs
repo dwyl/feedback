@@ -35,6 +35,7 @@ defmodule Feedback.FeedbackTest do
        :permalink_string,
        :mood,
        :public,
+       :responded_at,
        :inserted_at,
        :updated_at
      ]

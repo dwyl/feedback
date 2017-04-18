@@ -9,6 +9,7 @@ defmodule Feedback.Feedback do
     field :permalink_string, :string
     field :mood, :string
     field :public, :boolean
+    field :responded_at, :date
 
     timestamps()
   end
@@ -22,7 +23,8 @@ defmodule Feedback.Feedback do
       :submitter_email,
       :permalink_string,
       :mood,
-      :public])
+      :public,
+      :responded_at])
     |> validate_format(:submitter_email, ~r/@/)
     |> validate_length(:response, min: 2)
     |> validate_required([:item, :permalink_string, :mood])
