@@ -4,7 +4,6 @@ defmodule Feedback.Feedback do
   schema "feedback" do
     field :item, :string
     field :response, :string
-    field :responded, :boolean
     field :submitter_email, :string
     field :permalink_string, :string
     field :mood, :string
@@ -19,7 +18,6 @@ defmodule Feedback.Feedback do
     |> cast(params, [
       :item,
       :response,
-      :responded,
       :submitter_email,
       :permalink_string,
       :mood,

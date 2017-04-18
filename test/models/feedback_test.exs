@@ -6,7 +6,6 @@ defmodule Feedback.FeedbackTest do
   @valid_attrs %{
     item: "This is my feedback",
     response: "This is my response to your feedback",
-    responded: true,
     submitter_email: "test@email.com",
     permalink_string: "long-and-un-guessable",
     mood: "happy",
@@ -30,7 +29,6 @@ defmodule Feedback.FeedbackTest do
        :id,
        :item,
        :response,
-       :responded,
        :submitter_email,
        :permalink_string,
        :mood,
