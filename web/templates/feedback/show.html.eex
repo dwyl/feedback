@@ -85,7 +85,7 @@
         <span class="feedback-date"><%= format_date(@feedback.inserted_at) %></span>
       </div>
       <%= form_for @changeset, feedback_path(@conn, :update, @feedback.id), fn f -> %>
-        <%= textarea f, :item, placeholder: @feedback.item, class: "text_area" %>
+        <%= textarea f, :item, placeholder: @feedback.item, class: "text_area text_area-edit" %>
         <%= error_tag f, :item %>
         <%= hidden_input f, :edit, value: "false" %>
         <%= hidden_input f, :edited, value: "true" %>
