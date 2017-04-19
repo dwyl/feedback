@@ -94,6 +94,23 @@ body {
   margin-bottom: 1rem;
 }
 
+.edit-button {
+  display: inline-block;
+  color: grey;
+  border: none;
+  background-color: #ffffff;
+}
+
+.edit-button-container {
+  position: absolute;
+}
+
+.edit-container form {
+  position: absolute;
+  right: 0.7rem;
+  top: -1.1rem;
+}
+
 .emotion-container {
   text-align: center;
   min-height: 7rem;
@@ -126,6 +143,10 @@ body {
 .feedback-date {
   font-size: 1.5rem;
   color: grey;
+}
+
+.feedback-edit-title {
+  border-bottom: none;
 }
 
 .feedback-email-submitted {
@@ -290,7 +311,14 @@ body {
 .mood-image {
   width: 3rem;
   position: absolute;
-  right: 1rem;
+  right: 4.5rem;
+  top: 0.5rem;
+}
+
+.mood-image-edit {
+  width: 3rem;
+  position: absolute;
+  right: 1.5rem;
   top: 0.5rem;
 }
 
@@ -324,7 +352,14 @@ body {
 .padlock {
   width: 2.5rem;
   position: absolute;
-  right: 4.5rem;
+  right: 8rem;
+  top: 0.7rem;
+}
+
+.padlock-edit {
+  width: 2.5rem;
+  position: absolute;
+  right: 5rem;
   top: 0.7rem;
 }
 

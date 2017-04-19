@@ -91,6 +91,18 @@ defmodule Feedback.FeedbackControllerTest do
     assert redirected_to(conn, 302) =~ "/feedback/#{feedback.permalink_string}"
   end
 
+  test "/feedback/:id update feedback item", %{conn: conn} do
+    feedback = insert_feedback()
+    conn = put conn, feedback_path(conn, :update, feedback.id, %{"feedback" => %{"item" => "changed my mind"}})
+    assert redirected_to(conn, 302) =~ "/feedback/#{feedback.permalink_string}"
+  end
+
+  test "/feedback/:id update feedback item invalid", %{conn: conn} do
+    feedback = insert_feedback()
+    conn = put conn, feedback_path(conn, :update, feedback.id, %{"feedback" => %{"item" => ""}})
+    assert html_response(conn, 200) =~ "feedback"
+  end
+
   test "/happy", %{conn: conn} do
     insert_feedback()
     insert_feedback(%{response: "response"})

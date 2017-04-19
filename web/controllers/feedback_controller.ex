@@ -68,15 +68,27 @@ defmodule Feedback.FeedbackController do
              render conn, "show.html", feedback: feedback, changeset: changeset
          end
         false ->
-          changeset = Feedback.changeset(feedback, feedback_params)
-          case Repo.update(changeset) do
-            {:ok, _email} ->
-              conn
-              |> put_flash(:info, "Email submitted successfully!")
-              |> redirect(to: feedback_path(conn, :show, feedback.permalink_string))
-            {:error, changeset} ->
-              render conn, "show.html", feedback: feedback, changeset: changeset
-          end
+          case Map.has_key?(feedback_params, "submitter_email") do
+            true ->
+            changeset = Feedback.changeset(feedback, feedback_params)
+            case Repo.update(changeset) do
+              {:ok, _email} ->
+                conn
+                |> put_flash(:info, "Email submitted successfully!")
+                |> redirect(to: feedback_path(conn, :show, feedback.permalink_string))
+              {:error, changeset} ->
+                render conn, "show.html", feedback: feedback, changeset: changeset
+            end
+            false ->
+              changeset = Feedback.changeset(feedback, feedback_params)
+              case Repo.update(changeset) do
+                {:ok, feedback} ->
+                  conn
+                  |> redirect(to: feedback_path(conn, :show, feedback.permalink_string))
+                {:error, changeset} ->
+                  render conn, "show.html", feedback: feedback, changeset: changeset
+              end
+         end
     end
   end
 

@@ -7,13 +7,8 @@
   <%= if !@conn.assigns.current_user do %>
     <%= if @feedback.response == nil do %>
       <div class="feedback-code-container">
-        Here's your feedback code: <span class="highlight"><%= @feedback.permalink_string %></span>
-        </br>
-        </br>
-        Make a note of it so that you can track the feedback response.
-        To track it, enter the url https://localhost:4000/feedback/<span class="highlight">CODE</span>
-        <br />
-        <span class="feedback-anonymous-hint">(It's also the url of this page!)</span>
+        To track the response to your feedback, make a note of the <span class="highlight">url</span> of this page
+        and come back to it later.
       </div>
     <% end %>
     <%= if @feedback.submitter_email == nil && @feedback.response == nil do %>
@@ -44,16 +39,60 @@
     <img class="feedback-email-submitted-tick" src="/images/tick.svg" />
   </div>
   <% end %>
+  <%= if !@feedback.edit do %>
+    <div class="feedback-item-container">
+      <img class="mood-image" src="/images/<%= @feedback.mood %>.svg" />
+      <%= if !@feedback.public do %>
+        <img class="padlock" src="/images/locked.svg" />
+      <% end %>
+      <div class="edit-container">
+        <%= form_for @changeset, feedback_path(@conn, :update, @feedback.id), fn f -> %>
+          <%= hidden_input f, :edit, value: "true" %>
+          <%= submit "Edit", class: "edit-button" %>
+        <% end %>
+      </div>
+      <div class="feedback-item-title">Feedback -
+        <span class="feedback-date"><%= format_date(@feedback.inserted_at) %></span>
+      </div>
+      <div><%= @feedback.item %></div>
+    </div>
+  <% end %>
+  <%= if @feedback.edit && @conn.assigns.current_user do %>
   <div class="feedback-item-container">
     <img class="mood-image" src="/images/<%= @feedback.mood %>.svg" />
     <%= if !@feedback.public do %>
       <img class="padlock" src="/images/locked.svg" />
     <% end %>
+    <div class="edit-container">
+      <%= form_for @changeset, feedback_path(@conn, :update, @feedback.id), fn f -> %>
+        <%= hidden_input f, :edit, value: "true" %>
+        <%= submit "Edit", class: "edit-button" %>
+      <% end %>
+    </div>
     <div class="feedback-item-title">Feedback -
       <span class="feedback-date"><%= format_date(@feedback.inserted_at) %></span>
     </div>
     <div><%= @feedback.item %></div>
   </div>
+  <% end %>
+  <%= if @feedback.edit && !@conn.assigns.current_user do %>
+    <div class="feedback-item-container">
+      <img class="mood-image-edit" src="/images/<%= @feedback.mood %>.svg" />
+      <%= if !@feedback.public do %>
+        <img class="padlock-edit" src="/images/locked.svg" />
+      <% end %>
+      <div class="feedback-item-title">Feedback -
+        <span class="feedback-date"><%= format_date(@feedback.inserted_at) %></span>
+      </div>
+      <%= form_for @changeset, feedback_path(@conn, :update, @feedback.id), fn f -> %>
+        <%= textarea f, :item, placeholder: @feedback.item, class: "text_area" %>
+        <%= error_tag f, :item %>
+        <%= hidden_input f, :edit, value: "false" %>
+        <%= hidden_input f, :edited, value: "true" %>
+        <%= submit "Update", class: "button response-button" %>
+      <% end %>
+    </div>
+  <% end %>
   <%= if !@conn.assigns.current_user do %>
     <%= if !@feedback.response && @feedback.submitter_email == nil do %>
     <div class="feedback-response-message">
