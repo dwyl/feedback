@@ -1,6 +1,6 @@
 defmodule Feedback.FeedbackController do
   use Feedback.Web, :controller
-  alias Feedback.{Feedback, LayoutView}
+  alias Feedback.{Feedback, LayoutView, Response}
 
   plug :authenticate when action in [:index, :angry, :upset, :neutral, :happy, :delighted]
 
@@ -38,58 +38,36 @@ defmodule Feedback.FeedbackController do
         |> put_flash(:error, "That piece of feedback doesn't exist")
         |> redirect(to: page_path(conn, :index))
       feedback ->
+        loaded_feedback = Repo.preload(feedback, :response)
+        response_changeset = Response.changeset(%Response{})
         changeset = Feedback.changeset(feedback)
-        render conn, "show.html", layout: {LayoutView, "nav.html"}, feedback: feedback, changeset: changeset
+        render conn, "show.html", layout: {LayoutView, "nav.html"}, feedback: loaded_feedback, changeset: changeset, response_changeset: response_changeset
     end
   end
 
   def update(conn, %{"id" => id, "feedback" => feedback_params}) do
-    feedback = Repo.get!(Feedback, id)
-    case Map.has_key?(feedback_params, "response") do
-       true ->
-         response_date = DateTime.utc_now()
-         response_params = Map.put(feedback_params, "responded_at", response_date)
-         changeset = Feedback.changeset(feedback, response_params)
-         case Repo.update(changeset) do
-           {:ok, feedback} ->
-             case get_referer(conn.req_headers) do
-               "forum" ->
-                 send_response_email_if_exists(feedback)
-                 conn
-                 |> put_flash(:info, "Response sent successfully!")
-                 |> redirect(to: forum_path(conn, :forum_show, feedback.id))
-               _other ->
-                 send_response_email_if_exists(feedback)
-                 conn
-                 |> put_flash(:info, "Response sent successfully!")
-                 |> redirect(to: feedback_path(conn, :show, feedback.permalink_string))
-             end
-           {:error, changeset} ->
-             render conn, "show.html", feedback: feedback, changeset: changeset
-         end
+    feedback = Repo.get!(Feedback, id) |> Repo.preload(:response)
+      case Map.has_key?(feedback_params, "submitter_email") do
+        true ->
+        changeset = Feedback.changeset(feedback, feedback_params)
+        case Repo.update(changeset) do
+          {:ok, _email} ->
+            conn
+            |> put_flash(:info, "Email submitted successfully!")
+            |> redirect(to: feedback_path(conn, :show, feedback.permalink_string))
+          {:error, changeset} ->
+            render conn, "show.html", feedback: feedback, changeset: changeset
+        end
         false ->
-          case Map.has_key?(feedback_params, "submitter_email") do
-            true ->
-            changeset = Feedback.changeset(feedback, feedback_params)
-            case Repo.update(changeset) do
-              {:ok, _email} ->
-                conn
-                |> put_flash(:info, "Email submitted successfully!")
-                |> redirect(to: feedback_path(conn, :show, feedback.permalink_string))
-              {:error, changeset} ->
-                render conn, "show.html", feedback: feedback, changeset: changeset
-            end
-            false ->
-              changeset = Feedback.changeset(feedback, feedback_params)
-              case Repo.update(changeset) do
-                {:ok, feedback} ->
-                  conn
-                  |> redirect(to: feedback_path(conn, :show, feedback.permalink_string))
-                {:error, changeset} ->
-                  render conn, "show.html", feedback: feedback, changeset: changeset
-              end
-         end
-    end
+          changeset = Feedback.changeset(feedback, feedback_params)
+          case Repo.update(changeset) do
+            {:ok, feedback} ->
+              conn
+              |> redirect(to: feedback_path(conn, :show, feedback.permalink_string))
+            {:error, changeset} ->
+              render conn, "show.html", feedback: feedback, changeset: changeset
+          end
+      end
   end
 
   def create(conn, %{"feedback" => params}) do

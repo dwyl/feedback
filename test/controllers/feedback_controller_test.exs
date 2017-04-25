@@ -30,7 +30,7 @@ defmodule Feedback.FeedbackControllerTest do
 
   test "/feedback", %{conn: conn} do
     insert_feedback()
-    insert_feedback(%{id: 2, response: "Response"})
+    insert_feedback(%{id: 2})
     user = insert_validated_user()
     conn =
       conn
@@ -50,38 +50,10 @@ defmodule Feedback.FeedbackControllerTest do
     assert redirected_to(conn, 302) =~ "/"
   end
 
-  test "/feedback/:id update", %{conn: conn} do
-    feedback = insert_feedback()
-    conn =
-      conn
-      |> put_req_header("referer", "http://localhost:4000/forum")
-    conn = put conn, feedback_path(conn, :update, feedback.id, %{"feedback" => %{"response" => "response"}})
-    assert redirected_to(conn, 302) =~ "/forum/#{feedback.id}"
-  end
-
-  test "/feedback/:id update different request header", %{conn: conn} do
-    feedback = insert_feedback(%{submitter_email: "test@email.com"})
-    with_mock Mailer, [deliver_now: fn(_) -> nil end] do
-      conn =
-        conn
-        |> put_req_header("referer", "http://localhost:4000/feedback")
-      conn = put conn, feedback_path(conn, :update, feedback.id, %{"feedback" => %{"response" => "response"}})
-      assert redirected_to(conn, 302) =~ "/feedback/#{feedback.permalink_string}"
-    end
-  end
-
   test "/feedback/:id update error email", %{conn: conn} do
     feedback = insert_feedback()
+    insert_response(%{feedback_id: feedback.id})
     conn = put conn, feedback_path(conn, :update, feedback.id, %{"feedback" => %{"submitter_email" => "invalid_email_format"}})
-    assert html_response(conn, 200) =~ "feedback"
-  end
-
-  test "/feedback/:id update error response", %{conn: conn} do
-    feedback = insert_feedback()
-    conn =
-      conn
-      |> put_req_header("referer", "http://localhost:4000/feedback")
-    conn = put conn, feedback_path(conn, :update, feedback.id, %{"feedback" => %{"response" => "a"}})
     assert html_response(conn, 200) =~ "feedback"
   end
 
@@ -99,13 +71,14 @@ defmodule Feedback.FeedbackControllerTest do
 
   test "/feedback/:id update feedback item invalid", %{conn: conn} do
     feedback = insert_feedback()
+    insert_response(%{feedback_id: feedback.id})
     conn = put conn, feedback_path(conn, :update, feedback.id, %{"feedback" => %{"item" => ""}})
     assert html_response(conn, 200) =~ "feedback"
   end
 
   test "/happy", %{conn: conn} do
-    insert_feedback()
-    insert_feedback(%{response: "response"})
+    feedback = insert_feedback()
+    insert_response(%{feedback_id: feedback.id})
     user = insert_validated_user()
     conn =
       conn

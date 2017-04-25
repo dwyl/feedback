@@ -1,13 +1,15 @@
 defmodule Feedback.TestHelpers do
-  alias Feedback.{Repo, User, Feedback}
+  alias Feedback.{Repo, User, Feedback, Response}
 
   @user_id 1
   @feedback_id 1
+  @response_id 1
 
   def id() do
     %{
       user: @user_id,
-      feedback: @feedback_id
+      feedback: @feedback_id,
+      response: @response_id
     }
   end
 
@@ -35,6 +37,18 @@ defmodule Feedback.TestHelpers do
 
     %Feedback{}
     |> Feedback.changeset(changes)
+    |> Repo.insert!
+  end
+
+  def insert_response(attrs \\ %{}) do
+    changes = Map.merge(
+      %{response: "Response",
+        feedback_id: @feedback_id,
+        id: @response_id},
+        attrs)
+
+    %Response{}
+    |> Response.changeset(changes)
     |> Repo.insert!
   end
 end

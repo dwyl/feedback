@@ -3,14 +3,13 @@ defmodule Feedback.Feedback do
 
   schema "feedback" do
     field :item, :string
-    field :response, :string
     field :submitter_email, :string
     field :permalink_string, :string
     field :mood, :string
     field :public, :boolean
-    field :responded_at, :date
     field :edit, :boolean
     field :edited, :boolean
+    has_one :response, Feedback.Response
 
     timestamps()
   end
@@ -19,12 +18,10 @@ defmodule Feedback.Feedback do
     struct
     |> cast(params, [
       :item,
-      :response,
       :submitter_email,
       :permalink_string,
       :mood,
       :public,
-      :responded_at,
       :edit,
       :edited])
     |> validate_format(:submitter_email, ~r/@/)

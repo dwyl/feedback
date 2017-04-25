@@ -27,7 +27,7 @@ defmodule Feedback.Controllers.Helpers do
   end
 
   def get_feedback(emotion) do
-   raw_feedback = Repo.all(Feedback)
+   raw_feedback = Repo.all(Feedback) |> Repo.preload(:response)
    feedback =
    raw_feedback
    |> Enum.filter(fn item -> item.response == nil end)
@@ -38,7 +38,7 @@ defmodule Feedback.Controllers.Helpers do
   end
 
   def get_responded_feedback(emotion) do
-    raw_feedback = Repo.all(Feedback)
+    raw_feedback = Repo.all(Feedback) |> Repo.preload(:response)
     responded_feedback =
     raw_feedback
     |> Enum.filter(fn item -> item.response != nil end)
