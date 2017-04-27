@@ -246,6 +246,7 @@ body {
   border: 1px solid lightgray;
   padding: 1rem;
   border-radius: 5px;
+  position: relative;
   box-shadow: 2px 2px 5px #888888;
 }
 
@@ -311,7 +312,7 @@ body {
 .mood-image {
   width: 3rem;
   position: absolute;
-  right: 4.5rem;
+  right: 4.2rem;
   top: 0.5rem;
 }
 
@@ -352,7 +353,7 @@ body {
 .padlock {
   width: 2.5rem;
   position: absolute;
-  right: 8rem;
+  right: 7.5rem;
   top: 0.7rem;
 }
 
@@ -401,6 +402,11 @@ body {
 
 .response-button {
   margin-top: 1rem;
+}
+
+.response-edited {
+  color: #ADADAD;
+  font-size: 1.3rem;
 }
 
 .subtitle {

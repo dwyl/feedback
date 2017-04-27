@@ -73,9 +73,9 @@
   <% end %>
   <%= if @feedback.edit && @conn.assigns.current_user do %>
   <div class="feedback-item-container">
-    <img class="mood-image" src="/images/<%= @feedback.mood %>.svg" />
+    <img class="mood-image-edit" src="/images/<%= @feedback.mood %>.svg" />
     <%= if !@feedback.public do %>
-      <img class="padlock" src="/images/locked.svg" />
+      <img class="padlock-edit" src="/images/locked.svg" />
     <% end %>
     <div class="feedback-item-title">Feedback -
       <span class="feedback-date"><%= format_date(@feedback.inserted_at) %></span>
@@ -115,10 +115,30 @@
     </div>
     <% end %>
   <% end %>
-  <%= if @feedback.response do %>
+  <%= if @feedback.response && @conn.assigns.current_user && !@feedback.response.edit do %>
+    <div class="feedback-response-container">
+      <div class="edit-container">
+        <%= form_for @response_changeset, response_path(@conn, :update, @feedback.response), fn f -> %>
+          <%= hidden_input f, :edit, value: "true" %>
+          <%= submit "Edit", class: "edit-button" %>
+        <% end %>
+      </div>
+      <div class="feedback-response-title">Response -
+        <span class="feedback-date"><%= format_date(@feedback.response.inserted_at) %></span>
+        <%= if @feedback.response.edited do %>
+          <span class="response-edited">(edited)</span>
+        <% end %>
+      </div>
+      <div><%= @feedback.response.response %></div>
+    </div>
+  <% end %>
+  <%= if @feedback.response && !@conn.assigns.current_user do %>
     <div class="feedback-response-container">
       <div class="feedback-response-title">Response -
         <span class="feedback-date"><%= format_date(@feedback.response.inserted_at) %></span>
+        <%= if @feedback.response.edited do %>
+          <span class="response-edited">(edited)</span>
+        <% end %>
       </div>
       <div><%= @feedback.response.response %></div>
     </div>
@@ -130,5 +150,22 @@
       <%= hidden_input f, :feedback_id, value: @feedback.id %>
       <%= submit "Respond", [class: "button response-button", id: "response-button"] %>
     <% end %>
+  <% end %>
+  <%= if @feedback.response && @feedback.response.edit && @conn.assigns.current_user do %>
+    <div class="feedback-response-container">
+      <div class="feedback-response-title">Response -
+        <span class="feedback-date"><%= format_date(@feedback.response.inserted_at) %></span>
+        <%= if @feedback.response.edited do %>
+          <span class="response-edited">(edited)</span>
+        <% end %>
+      </div>
+      <%= form_for @response_changeset, response_path(@conn, :update, @feedback.response), fn f -> %>
+        <%= textarea f, :response, value: @feedback.response.response, class: "text_area text_area-edit" %>
+        <%= error_tag f, :response %>
+        <%= hidden_input f, :edit, value: "false" %>
+        <%= hidden_input f, :edited, value: "true" %>
+        <%= submit "Update", class: "button response-button" %>
+      <% end %>
+    </div>
   <% end %>
 </div>

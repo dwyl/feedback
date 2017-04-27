@@ -20,8 +20,9 @@ defmodule Feedback.ForumController do
         |> redirect(to: page_path(conn, :index))
       feedback ->
         feedback = Repo.preload(feedback, :response)
+        response_changeset = Response.changeset(%Response{})
         changeset = Response.changeset(%Response{})
-        render conn, "forum_show.html", layout: {LayoutView, "forum.html"}, feedback: feedback, changeset: changeset
+        render conn, "forum_show.html", layout: {LayoutView, "forum.html"}, feedback: feedback, changeset: changeset, response_changeset: response_changeset
     end
   end
 end

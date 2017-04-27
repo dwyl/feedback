@@ -43,4 +43,40 @@ defmodule Feedback.ResponseControllerTest do
     [{_header, location}] = Enum.filter(conn.resp_headers, fn {header, _value}  -> header == "location" end)
     assert redirected_to(conn, 302) =~ location
   end
+
+  test "response/:id update feedback", %{conn: conn} do
+    user = insert_validated_user()
+    conn =
+      conn
+      |> assign(:current_user, user)
+      |> put_req_header("referer", "http://localhost:4000/feedback")
+    feedback = insert_feedback()
+    response = insert_response(%{feedback_id: feedback.id})
+    conn = post conn, response_path(conn, :update, response, %{"response" => %{"response" => "changed my mind"}})
+    assert redirected_to(conn, 302) =~ "/feedback/#{feedback.permalink_string}"
+  end
+
+  test "response/:id update forum", %{conn: conn} do
+    user = insert_validated_user()
+    conn =
+      conn
+      |> assign(:current_user, user)
+      |> put_req_header("referer", "http://localhost:4000/forum")
+    feedback = insert_feedback()
+    response = insert_response(%{feedback_id: feedback.id})
+    conn = post conn, response_path(conn, :update, response, %{"response" => %{"response" => "changed my mind"}})
+    assert redirected_to(conn, 302) =~ "/forum/#{feedback.id}"
+  end
+
+  test "response/:id update error", %{conn: conn} do
+    user = insert_validated_user()
+    conn =
+      conn
+      |> assign(:current_user, user)
+      |> put_req_header("referer", "http://localhost:4000/forum")
+    feedback = insert_feedback()
+    response = insert_response(%{feedback_id: feedback.id})
+    conn = post conn, response_path(conn, :update, response, %{"response" => %{"response" => ""}})
+    assert redirected_to(conn, 302) =~ "/feedback/#{feedback.permalink_string}"
+  end
 end
