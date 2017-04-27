@@ -424,6 +424,7 @@ body {
   border: 1px solid lightgrey;
   border-radius: 5px;
   padding: 1rem;
+  background-color: #fafbfc;
 }
 
 .text_area-edit {
