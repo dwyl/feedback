@@ -17,3 +17,12 @@ config :feedback, Feedback.Repo,
   database: "feedback_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+# Configure password hashing
+
+config :comeonin, :bcrypt_log_rounds, 4
+config :comeonin, :pbkdf2_rounds, 1
+
+# Configure Bamboo email
+config :feedback, Feedback.Mailer,
+  adapter: Bamboo.TestAdapter
