@@ -3,7 +3,6 @@
     "minimum_coverage": 100
   },
   "skip_files": [
-    "web/channels",
     "lib/feedback.ex",
     "test/support/model_case.ex",
     "test/support/channel_case.ex",

@@ -1,1 +1,461 @@
-/* This file is for your main application css. */
+.alert-info {
+  text-align: center;
+}
+
+.alert-danger {
+  text-align: center;
+}
+
+.back-arrow {
+  width: 3rem;
+  margin-bottom: 1rem;
+}
+
+.back-button {
+  display: inline-block;
+  border: 1px solid #4ABDAC;
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  background-color: #4ABDAC;
+  color: #ffffff;
+  margin-top: 1rem;
+  margin-right: 1rem;
+  float: right;
+}
+
+body {
+  margin-top: 0;
+}
+
+.button {
+  width: 100%;
+  background-color: #4ABDAC;
+  border-style: none;
+  color: #ffffff;
+  padding: 1rem;
+  border-radius: 5px;
+  font-size: 2rem;
+}
+
+.dashboard-container {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  display: inline-block;
+}
+
+.dashboard-emotion {
+  width: 9rem;
+}
+
+.dashboard-emotion-container {
+  display: inline-block;
+  border: 1px solid lightblue;
+  padding: 2rem;
+  margin: 0.5rem;
+  border-radius: 5px;
+  position: relative;
+  box-shadow: 1px 1px 5px #888888;
+}
+
+.dashboard-info {
+  width: 9rem;
+}
+
+.dashboard-info-container {
+  text-align: center;
+  display: inline-block;
+  padding: 2rem;
+  padding-top: 1.5rem;
+  margin: 0.5rem;
+  border-radius: 5px;
+  position: relative;
+  color: #ffffff;
+  background-color: #4ABDAC;
+  float: left;
+  height: 13.2rem;
+  width: 13.2rem;
+  margin-right: 0.9rem;
+}
+
+.dwyl-logo {
+  width: 6rem;
+}
+
+.dwyl-logo-white {
+  width: 4rem;
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+}
+
+.dwyl-logo-container {
+  text-align: center;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+.emotion-container {
+  text-align: center;
+  min-height: 7rem;
+}
+
+.emotion-feedback-image {
+  width: 12rem;
+}
+
+.emotion-feedback-image-container {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.feedback-anonymous-hint {
+  text-align: center;
+  font-style: italic;
+}
+
+.feedback-code-container {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.feedback-dashboard-title {
+  color: #4ABDAC;
+  text-transform: capitalize;
+}
+
+.feedback-date {
+  font-size: 1.5rem;
+  color: grey;
+}
+
+.feedback-email-submitted {
+  text-align: center;
+  padding: 1rem;
+  border: 1px dashed lightblue;
+  border-radius: 5px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.feedback-email-submitted-tick {
+  width: 2rem;
+}
+
+.feedback-email-text {
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.feedback-item {
+  padding: 1.5rem;
+  padding-left: 2rem;
+  border-radius: 5px;
+  background-color: #4ABDAC;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  position: relative;
+  box-shadow: 2px 2px 5px #888888;
+}
+
+.feedback-item-container {
+  border: 1px solid lightgray;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.feedback-item-date {
+  display: inline-block;
+  color: #4ABDAC;
+  background-color: #ffffff;
+  border-radius: 500px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-top: 1rem;
+}
+
+.feedback-item-title {
+  border-bottom: 1px solid lightgrey;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  color: #4ABDAC;
+}
+
+.feedback-notification {
+  display: inline-block;
+    position: absolute;
+    right: -1rem;
+    top: -1rem;
+    color: #ffffff;
+    background-color: #e74c3c;
+    border-radius: 100%;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    min-width: 3.5rem;
+    min-height: 3.5rem;
+    text-align: center;
+    padding-top: 0.75rem;
+}
+
+.feedback-question {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.feedback-responded {
+  width: 4rem;
+  float: right;
+  position: absolute;
+  right: 1rem;
+  bottom: 2rem;
+}
+
+.feedback-response-container {
+  border: 1px solid lightgray;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.feedback-response-title {
+  border-bottom: 1px solid lightgrey;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  color: #4ABDAC;
+}
+
+.feedback-response-message {
+  background-color: #4ABDAC;
+  padding: 1.5rem;
+  color: #ffffff;
+  font-size: 2rem;
+  text-align: center;
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+
+.help-block {
+  text-transform: capitalize;
+  color: #e74c3c;
+}
+
+.highlight {
+  color: #4ABDAC;
+  font-size: 1.6rem;
+}
+
+.horizontal-spacer {
+  display: inline-block;
+  width: 2rem;
+  height: 1px;
+  background-color: grey;
+  margin-bottom: 0.5rem;
+}
+
+.horizontal-spacer-responded {
+  display: inline-block;
+  width: 7rem;
+  height: 1px;
+  background-color: grey;
+  margin-bottom: 0.5rem;
+}
+
+.input {
+  width: 100%;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.link:hover {
+  text-decoration: none;
+}
+
+.mood-image {
+  width: 3rem;
+  position: absolute;
+  right: 1rem;
+  top: 0.5rem;
+}
+
+.navigation {
+  min-height: 5rem;
+  border-bottom: 1px solid #4ABDAC;
+  margin-bottom: 2rem;
+  background-color: #4ABDAC;
+  box-shadow: 2px 2px 5px #888888;
+}
+
+.or {
+  display: inline-block;
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
+  color: grey;
+}
+
+.or-container {
+  text-align: center;
+  padding: 1rem;
+}
+
+.responded {
+  display: inline-block;
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
+  color: grey;
+}
+
+.responded-container {
+  text-align: center;
+  padding: 1rem;
+}
+
+.response-button {
+  margin-top: 1rem;
+}
+
+.subtitle {
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.text_area {
+  resize: none;
+  min-height: 15rem;
+  outline: none;
+  width: 100%;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+.title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.top-buffer {
+  margin-top: 2rem;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+/* emotion css */
+
+.delighted, .happy, .neutral, .sad, .angry {
+  /* HIDE RADIO */
+  visibility: hidden;
+  /* Makes input not-clickable */
+  position: absolute;
+  /* Remove input from document flow */
+}
+
+.delighted + label {
+  background-image: url("/images/delighted.svg");
+}
+
+.happy + label {
+  background-image: url("/images/happy.svg");
+}
+
+.neutral + label {
+  background-image: url("/images/neutral.svg");
+}
+
+.sad + label {
+  background-image: url("/images/sad.svg");
+}
+
+.angry + label {
+  background-image: url("/images/angry.svg");
+}
+
+.delighted + label::after, .happy + label::after, .neutral + label::after, .sad + label::after, .angry + label::after {
+  text-align: center;
+  width: 100%;
+  position: relative;
+  display: block;
+  color: #EA5C37;
+}
+
+input + label {
+  /* IMAGE STYLES */
+  cursor: pointer;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  -webkit-o-transition: all 200ms ease-in;
+  -moz-o-transition: all 200ms ease-in;
+  transition: all 200ms ease-in;
+  height: 3em;
+  width: 3em;
+  position: relative;
+  top: 25%;
+  transform: translateY(-25%);
+}
+
+label + input:hover {
+  /* HIDE RADIO */
+  -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+  -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
+  filter: brightness(1.2) grayscale(.5) opacity(.9);
+}
+input:checked + label {
+  /* (RADIO CHECKED) IMAGE STYLES */
+  -webkit-filter: none;
+  -moz-filter: none;
+  filter: none;
+  background-color: rgb(234, 130, 75);
+  background-color: rgba(234, 92, 55, 0.4);
+  border-radius: 100%;
+  width: 6rem;
+  height: 6rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+@media (min-width: 600px) {
+  input + label {
+    width: 6rem;
+    height: 6rem;
+  }
+  input:checked + label {
+    width: 9rem;
+    height: 9rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+  .emotion-container {
+    min-height: 10rem;
+  }
+  .dashboard-emotion {
+    width: 14rem;
+  }
+  .dashboard-info-container {
+    height: 18.1rem;
+    width: 18.1rem;
+    padding-top: 4rem;
+    margin: 0.4rem;
+    font-size: 1.6rem;
+    margin-right: 0.9rem;
+  }
+  .dashboard-container {
+    padding-left: 9%;
+  }
+  .dashboard-emotion-container {
+    height: 18rem;
+    width: 18rem;
+  }
+}

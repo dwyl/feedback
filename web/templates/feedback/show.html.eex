@@ -1,0 +1,81 @@
+<div>
+  <%= if @conn.assigns.current_user do %>
+    <a href="/<%= @feedback.mood %>">
+      <img class="back-arrow" src="/images/back-arrow-button.svg" />
+    </a>
+  <% end %>
+  <%= if !@conn.assigns.current_user do %>
+    <div class="feedback-code-container">
+      Here's your feedback code: <span class="highlight"><%= @feedback.permalink_string %></span>
+      </br>
+      </br>
+      Make a note of it so that you can track the feedback response.
+      To track it, enter the url https://localhost:4000/feedback/<span class="highlight">CODE</span>
+      <br />
+      <span class="feedback-anonymous-hint">(It's also the url of this page!)</span>
+    </div>
+    <%= if @feedback.submitter_email == nil && @feedback.response == nil do %>
+    <div class="or-container">
+      <div class="horizontal-spacer"></div>
+      <div class="or">OR</div>
+      <div class="horizontal-spacer"></div>
+    </div>
+    <div class="feedback-email-container">
+      <div class="feedback-email-text">
+        If you want to be notified of a response by email, enter it below:
+      </div>
+      <div class="feedback-anonymous-hint">
+        (To remain <span class="highlight">anonymous</span> we recommend setting up and using an obscure email address, for
+        example: "ilovepuppies@gmail.com")
+      </div>
+      <%= form_for @changeset, feedback_path(@conn, :update, @feedback.id), fn f -> %>
+        <%= text_input f, :submitter_email, placeholder: "Enter your email address", class: "input" %>
+        <%= error_tag f, :submitter_email %>
+        <%= submit "Submit", class: "button" %>
+      <% end %>
+    </div>
+    <% end %>
+  <% end %>
+  <%= if @feedback.submitter_email != nil && !@feedback.responded && !@conn.assigns.current_user do %>
+  <div class="feedback-email-submitted">
+    Feedback response notifications will be sent to <span class="highlight"><%= @feedback.submitter_email %></span>
+    <img class="feedback-email-submitted-tick" src="/images/tick.svg" />
+  </div>
+  <% end %>
+  <div class="feedback-item-container">
+    <img class="mood-image" src="/images/<%= @feedback.mood %>.svg" />
+    <div class="feedback-item-title">Feedback -
+      <span class="feedback-date"><%= format_date(@feedback.inserted_at) %></span>
+    </div>
+    <div><%= @feedback.item %></div>
+  </div>
+  <%= if !@conn.assigns.current_user do %>
+    <%= if !@feedback.response && @feedback.submitter_email == nil do %>
+    <div class="feedback-response-message">
+      There hasn't been a response to your feedback yet. Please check again later
+      or we can notify you if you enter your email in the form above.
+    </div>
+    <% end %>
+    <%= if !@feedback.response && @feedback.submitter_email != nil do %>
+    <div class="feedback-response-message">
+      There hasn't been a response to your feedback yet. We will notify you by
+      email once a response has been made.
+    </div>
+    <% end %>
+  <% end %>
+  <%= if @feedback.response do %>
+    <div class="feedback-response-container">
+      <div class="feedback-response-title">Response -
+        <span class="feedback-date"><%= format_date(@feedback.updated_at) %></span>
+      </div>
+      <div><%= @feedback.response %></div>
+    </div>
+  <% end %>
+  <%= if !@feedback.response && @conn.assigns.current_user do %>
+    <%= form_for @changeset, feedback_path(@conn, :update, @feedback.id), fn f -> %>
+      <%= textarea f, :response, placeholder: "Enter your feedback response", class: "text_area" %>
+      <%= error_tag f, :response %>
+      <%= submit "Respond", [class: "button response-button", id: "response-button"] %>
+    <% end %>
+  <% end %>
+</div>
