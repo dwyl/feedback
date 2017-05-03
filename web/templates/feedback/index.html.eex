@@ -1,0 +1,32 @@
+<div class="logout-button">
+  <%= link "Log out", to: session_path(@conn, :delete, @current_user), method: "delete", class: "logout-button back-button link" %>
+</div>
+<div class="title">Feedback Dashboard</div>
+
+<%= for feedback <- @feedback do %>
+  <a class="link" href="/feedback/<%= feedback.permalink_string %>">
+    <div class="feedback-item">
+      <%= truncate_text(feedback.item, 32) %>
+      <div><%= format_date(feedback.inserted_at) %></div>
+      <%= if feedback.response do %>
+        <img class="feedback-responded" src="/images/tick.svg" />
+      <% end %>
+    </div>
+  </a>
+<% end %>
+<div class="responded-container">
+  <div class="horizontal-spacer-responded"></div>
+  <div class="responded">RESPONDED</div>
+  <div class="horizontal-spacer-responded"></div>
+</div>
+<%= for responded_feedback <- @responded_feedback do %>
+  <a class="link" href="/feedback/<%= responded_feedback.permalink_string %>">
+    <div class="feedback-item">
+      <%= truncate_text(responded_feedback.item, 32) %>
+      <div><%= format_date(responded_feedback.inserted_at) %></div>
+      <%= if responded_feedback.response do %>
+        <img class="feedback-responded" src="/images/tick.svg" />
+      <% end %>
+    </div>
+  </a>
+<% end %>
