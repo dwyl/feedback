@@ -36,6 +36,8 @@ defmodule Feedback.Web do
 
       import Feedback.Router.Helpers
       import Feedback.Gettext
+      import Feedback.Controllers.Helpers
+      import Feedback.Auth, only: [authenticate: 2]
     end
   end
 
