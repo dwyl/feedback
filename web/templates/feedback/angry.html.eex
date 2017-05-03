@@ -1,0 +1,5 @@
+<%= render "dashboard.html",
+feedback: @feedback,
+responded_feedback: @responded_feedback,
+conn: @conn, current_user: @current_user,
+emotion: "angry" %>

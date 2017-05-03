@@ -1,0 +1,21 @@
+<div class="logout-button">
+  <%= link "Log out", to: session_path(@conn, :delete, @current_user), method: "delete", class: "logout-button back-button link" %>
+</div>
+
+<div class="feedback-dashboard-title title">Feeback Categories</div>
+
+<div class="dashboard-container top-buffer">
+  <div class="dashboard-info-container">
+    <div>Click on an emotion to see the feedback from that category!</div>
+  </div>
+  <%= for {emotion, feedback} <- @emotions do %>
+    <a href="/<%= emotion %>">
+      <div class="dashboard-emotion-container">
+        <%= if length(feedback) > 0 do %>
+          <div class="feedback-notification"><%= length(feedback) %></div>
+        <% end %>
+        <img class="dashboard-emotion" src="/images/<%= emotion %>.svg" />
+      </div>
+    </a>
+  <% end %>
+</div>

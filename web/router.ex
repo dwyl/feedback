@@ -7,16 +7,20 @@ defmodule Feedback.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug Feedback.Auth, repo: Feedback.Repo
   end
 
   scope "/", Feedback do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    resources "/feedback", FeedbackController, only: [:index, :new, :create, :show, :update]
+    resources "/session", SessionController, only: [:new, :create, :delete]
+    get "/delighted", FeedbackController, :delighted
+    get "/happy", FeedbackController, :happy
+    get "/neutral", FeedbackController, :neutral
+    get "/sad", FeedbackController, :sad
+    get "/angry", FeedbackController, :angry
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", Feedback do
-  #   pipe_through :api
-  # end
 end
