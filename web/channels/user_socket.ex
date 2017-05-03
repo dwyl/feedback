@@ -2,7 +2,7 @@ defmodule Feedback.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", Feedback.RoomChannel
+  channel "room:*", Feedback.RoomChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
