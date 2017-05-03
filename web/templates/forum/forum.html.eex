@@ -1,0 +1,17 @@
+<div class="feedback-dashboard-title title">Feedback Forum</div>
+<%= if length(@public_feedback) == 0 do %>
+<div class="feedback-response-message">Looks like there isn't any public feedback yet! Please check back again later</div>
+<% end %>
+<%= for feedback <- @public_feedback do %>
+  <a class="link" href="/forum/<%= feedback.id %>">
+    <div class="feedback-item">
+      <img class="mood-image-forum" src="/images/<%= feedback.mood %>.svg" />
+      <%= if feedback.response != nil do %>
+        <img class="feedback-responded-forum" src="/images/tick.svg" />
+      <% end %>
+      <%= truncate_text(feedback.item, 32) %>
+      <br />
+      <div class="feedback-item-date"><%= format_date(feedback.inserted_at) %></div>
+    </div>
+  </a>
+<% end %>

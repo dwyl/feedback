@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>dwyl feedback</title>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+  </head>
+
+  <body>
+    <div class="navigation">
+      <a href="/">
+        <img class="dwyl-logo-white" src="/images/dwyl-heart-only-logo-white.png"  />
+      </a>
+      <%= if !@conn.assigns.current_user do %>
+        <a class="link" href="/feedback/new">
+          <div class="back-button">Leave more feedback</div>
+        </a>
+      <% end %>
+      <%= if @current_user do %>
+          <%= link "Log out", to: session_path(@conn, :delete, @current_user), method: "delete", class: "back-button link" %>
+      <% end %>
+      <a class="link" href="/forum">
+        <div class="back-button">Forum</div>
+      </a>
+    </div>
+    <div class="container">
+      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+
+      <main role="main">
+        <%= render @view_module, @view_template, assigns %>
+      </main>
+
+    </div> <!-- /container -->
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <script>require("web/static/js/app").App.addLabelListeners()</script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<div class="dwyl-logo-container">
+  <img src="/images/dwyl-heart-only-logo.png" class="dwyl-logo" />
+</div>
+<div class="title">Help us be better</div>
+<div class="subtitle">Submit your anonymous feedback below. Don't worry, we can take it!</div>
+
+<%= form_for @changeset, feedback_path(@conn, :create), fn f -> %>
+  <div class="feedback-question">How are you feeling?</div>
+  <br />
+  <br />
+  <div class="emotion-container">
+    <%= for emotion <- @emotions do %>
+      <%=radio_button(
+         f,
+         :mood,
+         emotion,
+         [class: emotion, id: "feedback_" <> emotion]) %>
+      <%= label f, emotion, "" %>
+    <% end %>
+    <%= if @changeset.action do %>
+      <%= error_tag f, :mood %>
+    <% end %>
+  </div>
+  <div class="feedback-question">Tell us your thoughts.</div>
+  <div class="feedback-anonymous-hint">
+    (To help retain your <span class="highlight">anonymity</span>, use
+    <span class="highlight">short</span> and <span class="highlight">concise</span>
+    sentences so it is more <span class="highlight">difficult</span> to
+    <span class="highlight">identify</span> you by your writing style!)
+  </div>
+  <div class="form-group">
+    <%= textarea f, :item, placeholder: "What's on your mind?", class: "text_area top-buffer" %>
+    <%= error_tag f, :item %>
+  </div>
+  <div class="privacy-toggle-container">
+    <div class="private">Private</div>
+    <div class="public">Public</div>
+    <label class="switch">
+      <%= checkbox f, :public %>
+      <div class="slider round"></div>
+    </label>
+  </div>
+  <%= submit "Share", [class: "button", id: "feedback-button"] %>
+<% end %>
