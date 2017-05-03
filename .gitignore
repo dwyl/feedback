@@ -25,3 +25,6 @@ erl_crash.dump
 
 # Coverage
 cover
+
+# Environment Variables
+.env

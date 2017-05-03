@@ -1,1 +1,189 @@
-/* This file is for your main application css. */
+.alert-info {
+  text-align: center;
+}
+
+.alert-danger {
+  text-align: center;
+}
+
+.back-button {
+  display: inline-block;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.button {
+  width: 100%;
+  background-color: #4ABDAC;
+  border-style: none;
+  color: #ffffff;
+  padding: 1rem;
+  border-radius: 5px;
+  font-size: 2rem;
+}
+
+.dwyl-logo {
+  width: 10rem;
+}
+
+.dwyl-logo-container {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.feedback-anonymous-hint {
+  text-align: center;
+  font-style: italic;
+}
+
+.feedback-code-container {
+  text-align: center;
+}
+
+.feedback-email-submitted {
+  text-align: center;
+  padding: 1rem;
+  border: 1px dashed lightblue;
+  border-radius: 5px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.feedback-email-submitted-tick {
+  width: 2rem;
+}
+
+.feedback-email-text {
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.feedback-item {
+  padding: 2rem;
+  border-radius: 5px;
+  background-color: #4ABDAC;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.feedback-item-container {
+  border: 1px solid lightgray;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+.feedback-item-title {
+  border-bottom: 1px solid lightgrey;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+}
+
+.feedback-responded {
+  width: 4rem;
+  float: right;
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+}
+
+.feedback-response-container {
+  border: 1px solid lightgray;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.feedback-response-title {
+  border-bottom: 1px solid lightgrey;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+}
+
+.feedback-response-message {
+  background-color: #4ABDAC;
+  padding: 0.5rem;
+  color: #ffffff;
+  font-size: 2rem;
+  text-align: center;
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+
+.help-block {
+  text-transform: capitalize;
+  color: #e74c3c;
+}
+
+.highlight {
+  color: #4ABDAC;
+  font-size: 1.6rem;
+}
+
+.horizontal-spacer {
+  display: inline-block;
+  width: 2rem;
+  height: 1px;
+  background-color: black;
+  margin-bottom: 0.5rem;
+}
+
+.input {
+  width: 100%;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.link:hover {
+  text-decoration: none;
+}
+
+.logout-button {
+  padding-right: 0.5rem;
+}
+
+.or {
+  display: inline-block;
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
+}
+
+.or-container {
+  text-align: center;
+  padding: 1rem;
+}
+
+.subtitle {
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.text_area {
+  resize: none;
+  min-height: 15rem;
+  outline: none;
+  width: 100%;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+.title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.underline {
+  text-decoration: underline;
+}
