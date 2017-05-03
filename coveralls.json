@@ -3,11 +3,11 @@
     "minimum_coverage": 100
   },
   "skip_files": [
-    "web/channels",
     "lib/feedback.ex",
     "test/support/model_case.ex",
     "test/support/channel_case.ex",
     "web/web.ex",
-    "web/views/error_helpers.ex"
+    "web/views/error_helpers.ex",
+    "web/models/forum.ex"
   ]
 }
