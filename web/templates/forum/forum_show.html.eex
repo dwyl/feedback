@@ -1,0 +1,37 @@
+<a href="/forum">
+  <img class="back-arrow" src="/images/back-arrow-button.svg" />
+</a>
+
+<div class="feedback-item-container">
+  <img class="mood-image" src="/images/<%= @feedback.mood %>.svg" />
+  <%= if !@feedback.public do %>
+    <img class="padlock" src="/images/locked.svg" />
+  <% end %>
+  <div class="feedback-item-title">Feedback -
+    <span class="feedback-date"><%= format_date(@feedback.inserted_at) %></span>
+  </div>
+  <div><%= @feedback.item %></div>
+</div>
+
+<%= if @feedback.response do %>
+  <div class="feedback-response-container">
+    <div class="feedback-response-title">Response -
+      <span class="feedback-date"><%= format_date(@feedback.updated_at) %></span>
+    </div>
+    <div><%= @feedback.response %></div>
+  </div>
+<% end %>
+
+<%= if !@feedback.response && !@conn.assigns.current_user do %>
+  <div class="feedback-response-message">
+    There hasn't been a response to this feedback yet. Please check again later!
+  </div>
+<% end %>
+
+<%= if !@feedback.response && @conn.assigns.current_user do %>
+  <%= form_for @changeset, feedback_path(@conn, :update, @feedback.id), fn f -> %>
+    <%= textarea f, :response, placeholder: "Enter your feedback response", class: "text_area" %>
+    <%= error_tag f, :response %>
+    <%= submit "Respond", [class: "button response-button", id: "response-button"] %>
+  <% end %>
+<% end %>
