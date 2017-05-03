@@ -26,6 +26,7 @@ defmodule Feedback.ConnCase do
       import Ecto.Query
 
       import Feedback.Router.Helpers
+      import Feedback.TestHelpers
 
       # The default endpoint for testing
       @endpoint Feedback.Endpoint

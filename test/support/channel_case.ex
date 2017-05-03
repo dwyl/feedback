@@ -24,6 +24,7 @@ defmodule Feedback.ChannelCase do
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
+      import Feedback.TestHelpers
 
 
       # The default endpoint for testing
