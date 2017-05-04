@@ -1,5 +1,5 @@
 defmodule Feedback.UserTest do
-  use Feedback.ModelCase, async: false
+  use Feedback.ModelCase
   alias Feedback.User
   alias Comeonin.Bcrypt
 
