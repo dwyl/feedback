@@ -24,7 +24,7 @@ defmodule Feedback.Mixfile do
   def application do
     [mod: {Feedback, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :comeonin]]
+                    :phoenix_ecto, :postgrex, :comeonin, :bamboo]]
   end
 
   # Specifies which paths to compile per environment.
@@ -44,7 +44,10 @@ defmodule Feedback.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:comeonin, "~> 2.0"},
-     {:excoveralls, "~> 0.6.2"}]
+     {:excoveralls, "~> 0.6.2"},
+     {:bamboo, "~> 0.7"},
+     {:bamboo_smtp, "~> 1.2.1"},
+     {:mock, "~> 0.2.0", only: :test}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

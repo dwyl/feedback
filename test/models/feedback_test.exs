@@ -5,10 +5,12 @@ defmodule Feedback.FeedbackTest do
 
   @valid_attrs %{
     item: "This is my feedback",
-    response: "This is my response to your feedback",
-    responded: true,
     submitter_email: "test@email.com",
-    permalink_string: "long-and-un-guessable"
+    permalink_string: "long-and-un-guessable",
+    mood: "happy",
+    public: false,
+    edit: false,
+    edited: false
   }
   @invalid_attrs %{}
 
@@ -27,10 +29,12 @@ defmodule Feedback.FeedbackTest do
      expected = [
        :id,
        :item,
-       :response,
-       :responded,
        :submitter_email,
        :permalink_string,
+       :mood,
+       :public,
+       :edit,
+       :edited,
        :inserted_at,
        :updated_at
      ]

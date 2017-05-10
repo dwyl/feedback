@@ -53,9 +53,21 @@ We recommend reading: https://github.com/dwyl/learn-phoenix-framework
 
 ### Get Started in _2 Minutes_
 
+
 + Clone the Git repository: `git clone git@github.com:dwyl/feedback.git && cd feedback`
 + Install dependencies with `mix deps.get && npm install`
 + Create and migrate your database with `mix ecto.create && mix ecto.migrate`
++ Set environment variables:
+  + ADMIN_EMAIL - the email that you want to log in with (must also be verified by AWS)
+  + ADMIN_PASSWORD - the password you want to log in with
+  + SECRET_KEY_BASE - taken from `config.exs`
+  + TARGET_EMAIL - verified SES email for testing
+  + SES_SERVER - your SES server
+  + SES_PORT - your SES port
+  + SMTP_USERNAME - your SMTP username
+  + SMTP_PASSWORD - your SMTP password
++ Run `priv/repo/seeds.exs`
++ Run `source .env` to load your environment variables
 + Start Phoenix endpoint with `mix phoenix.server`
 
 Now visit [`localhost:4000`](http://localhost:4000) from your web browser.
