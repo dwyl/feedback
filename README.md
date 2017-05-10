@@ -56,6 +56,7 @@ We recommend reading: https://github.com/dwyl/learn-phoenix-framework
 + Clone the Git repository: `git clone git@github.com:dwyl/feedback.git && cd feedback`
 + Install dependencies with `mix deps.get && npm install`
 + Create and migrate your database with `mix ecto.create && mix ecto.migrate`
++ Run `source .env` to load your environment variables
 + Start Phoenix endpoint with `mix phoenix.server`
 
 Now visit [`localhost:4000`](http://localhost:4000) from your web browser.
