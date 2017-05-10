@@ -58,7 +58,7 @@ We recommend reading: https://github.com/dwyl/learn-phoenix-framework
 + Install dependencies with `mix deps.get && npm install`
 + Create and migrate your database with `mix ecto.create && mix ecto.migrate`
 + Set environment variables:
-  + ADMIN_EMAIL - the email that you want to log in with
+  + ADMIN_EMAIL - the email that you want to log in with (must also be verified by AWS)
   + ADMIN_PASSWORD - the password you want to log in with
   + SECRET_KEY_BASE - taken from `config.exs`
   + TARGET_EMAIL - verified SES email for testing
