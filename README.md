@@ -66,6 +66,8 @@ We recommend reading: https://github.com/dwyl/learn-phoenix-framework
   + SES_PORT - your SES port
   + SMTP_USERNAME - your SMTP username
   + SMTP_PASSWORD - your SMTP password
+  + DEV_URL - http://localhost:4000
+  + PROD_URL - url of the live site
 + Run `priv/repo/seeds.exs`
 + Run `source .env` to load your environment variables
 + Start Phoenix endpoint with `mix phoenix.server`
