@@ -5,7 +5,7 @@ defmodule Feedback.ResponseControllerTest do
   import Mock
 
   test "response/create valid from forum", %{conn: conn} do
-    with_mock Mailer, [deliver_now: fn(_) -> nil end] do
+    with_mock Mailer, [deliver_later: fn(_) -> nil end] do
       user = insert_validated_user()
       conn =
         conn
@@ -19,7 +19,7 @@ defmodule Feedback.ResponseControllerTest do
   end
 
   test "response/create valid from feedback", %{conn: conn} do
-    with_mock Mailer, [deliver_now: fn(_) -> nil end] do
+    with_mock Mailer, [deliver_later: fn(_) -> nil end] do
       user = insert_validated_user()
       conn =
         conn

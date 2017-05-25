@@ -10,7 +10,7 @@ defmodule Feedback.FeedbackControllerTest do
   end
 
   test "/feedback/create valid", %{conn: conn} do
-    with_mock Mailer, [deliver_now: fn(_) -> nil end] do
+    with_mock Mailer, [deliver_later: fn(_) -> nil end] do
       conn = post conn, feedback_path(conn, :create, %{"feedback" => %{item: "test", mood: "happy"}})
       [{_header, location}] = Enum.filter(conn.resp_headers, fn {header, _value}  -> header == "location" end)
       assert redirected_to(conn, 302) =~ location

@@ -60,7 +60,7 @@ defmodule Feedback.Controllers.Helpers do
     message = "Hi there! There has been a response to your feedback. Follow this link #{link} to view it."
     if feedback.submitter_email != nil do
       Email.send_email(feedback.submitter_email, subject, message)
-      |> Mailer.deliver_now()
+      |> Mailer.deliver_later()
     end
   end
 
@@ -69,7 +69,7 @@ defmodule Feedback.Controllers.Helpers do
     subject = "New Feedback"
     message = "You have a new piece of #{feedback.mood} feedback: \"#{feedback.item}\". Follow this link #{link} to respond."
     Email.send_email(System.get_env("ADMIN_EMAIL"), subject, message)
-    |> Mailer.deliver_now()
+    |> Mailer.deliver_later()
   end
 
 end
