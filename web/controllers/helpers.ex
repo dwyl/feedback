@@ -54,8 +54,16 @@ defmodule Feedback.Controllers.Helpers do
     path
   end
 
+  def get_base_url() do
+    dev_env? = Mix.env == :dev
+    case dev_env? do
+      true -> System.get_env("DEV_URL")
+      false -> System.get_env("PROD_URL")
+    end
+  end
+
   def send_response_email_if_exists(feedback) do
-    link = "http://localhost:4000/feedback/#{feedback.permalink_string}"
+    link = "#{get_base_url()}/feedback/#{feedback.permalink_string}"
     subject = "Feedback Response"
     message = "Hi there! There has been a response to your feedback. Follow this link #{link} to view it."
     if feedback.submitter_email != nil do
@@ -65,7 +73,7 @@ defmodule Feedback.Controllers.Helpers do
   end
 
   def send_feedback_email(feedback) do
-    link = "http://localhost:4000/feedback/#{feedback.permalink_string}"
+    link = "#{get_base_url()}/feedback/#{feedback.permalink_string}"
     subject = "New Feedback"
     message = "You have a new piece of #{feedback.mood} feedback: \"#{feedback.item}\". Follow this link #{link} to respond."
     Email.send_email(System.get_env("ADMIN_EMAIL"), subject, message)

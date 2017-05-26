@@ -1,11 +1,12 @@
 defmodule Feedback.ResponseControllerTest do
   use Feedback.ConnCase, async: false
-  alias Feedback.{Email, Mailer}
+  alias Feedback.{Mailer}
 
   import Mock
 
   test "response/create valid from forum", %{conn: conn} do
     with_mock Mailer, [deliver_later: fn(_) -> nil end] do
+      Mix.env(:test)
       user = insert_validated_user()
       conn =
         conn
@@ -20,6 +21,7 @@ defmodule Feedback.ResponseControllerTest do
 
   test "response/create valid from feedback", %{conn: conn} do
     with_mock Mailer, [deliver_later: fn(_) -> nil end] do
+      Mix.env(:dev)
       user = insert_validated_user()
       conn =
         conn
